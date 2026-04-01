@@ -113,6 +113,12 @@ button:focus-visible {
 }
 .nav__logo:hover { opacity: 0.55; }
 
+.nav__logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
 .nav__links {
   display: flex;
   gap: 28px;
@@ -296,9 +302,53 @@ button:focus-visible {
   color: var(--color-text);
 }
 
+.footer__links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer__link {
+  font-size: 0.8rem;
+  color: var(--color-text-faint);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+.footer__link:hover { color: var(--color-text-muted); }
+
 .footer__copy {
   font-size: 0.8rem;
   color: var(--color-text-faint);
+}
+
+/* ── Imprint ──────────────────────────────────────────────────── */
+.imprint-body {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 600px;
+}
+
+.imprint-block {}
+
+.imprint-heading {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.imprint-address,
+.imprint-block p {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  font-style: normal;
+}
+
+.imprint-block--disclaimer {
+  padding-top: 40px;
+  border-top: 1px solid var(--color-border);
 }
 
 /* ── Fade-in animation ────────────────────────────────────────── */
