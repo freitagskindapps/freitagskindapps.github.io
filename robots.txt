@@ -1,0 +1,7 @@
+# https://freitagskindapps.github.io/
+# Allow useful crawlers; policy mirrors public marketing intent. Imprint uses HTML noindex.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://freitagskindapps.github.io/sitemap.xml
