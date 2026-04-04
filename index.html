@@ -22,7 +22,8 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "freitagskind apps",
-    "url": "https://freitagskindapps.github.io/"
+    "url": "https://freitagskindapps.github.io/",
+    "logo": "https://freitagskindapps.github.io/freitagskind.png"
   }
   </script>
 
@@ -42,7 +43,7 @@
   <!-- ── Navigation ─────────────────────────────────────── -->
   <nav class="nav" aria-label="Main navigation">
     <a href="#top" class="nav__logo" aria-label="freitagskind apps — home">
-      <img src="freitagskind.png" alt="freitagskind apps" width="1376" height="768" class="nav__logo-img" decoding="async" />
+      <img src="freitagskind.png" alt="" width="1376" height="768" class="nav__logo-img" decoding="async" />
     </a>
     <ul class="nav__links">
       <li><a href="#apps" class="nav__link">Apps</a></li>
@@ -54,13 +55,27 @@
 
     <!-- ── Hero ───────────────────────────────────────────── -->
     <header class="hero" id="top">
+      <div class="hero__bg" aria-hidden="true"></div>
       <div class="hero__inner">
-        <p class="hero__eyebrow">freitagskind apps</p>
-        <h1 class="hero__title">Apps that get<br />out of the way.</h1>
-        <p class="hero__body">
-          We build small, focused apps for people who want tools
-          that work quietly and well.
-        </p>
+        <div class="hero__visual">
+          <img
+            src="freitagskind.png"
+            alt="freitagskind apps"
+            width="1376"
+            height="768"
+            class="hero__logo"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero__copy">
+          <p class="hero__eyebrow">Independent studio</p>
+          <h1 class="hero__title">Apps that get<br />out of the way.</h1>
+          <p class="hero__body">
+            We build small, focused apps for people who want tools
+            that work quietly and well.
+          </p>
+        </div>
       </div>
     </header>
 
