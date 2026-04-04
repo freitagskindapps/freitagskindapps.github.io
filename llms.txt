@@ -1,0 +1,21 @@
+# freitagskind apps
+
+> Independent mobile app studio building thoughtful tools for everyday life. Current focus: Pendula, a countdown widget for important moments. Primary audience: people who want calmer, utility-first apps. Contact: hello@freitagskind.app.
+
+This file follows the community `/llms.txt` proposal (Markdown at site root, curated links for LLM context). It complements `/robots.txt` and `/sitemap.xml`; it does not replace semantic HTML or JSON-LD on the live pages.
+
+## Site
+
+- [Marketing home](https://freitagskindapps.github.io/): Positioning, Pendula overview, studio story, and contact.
+
+## Apps
+
+- [Pendula (featured app on home)](https://freitagskindapps.github.io/#apps): Countdown widget for birthdays, trips, goals, and milestones (Android; formerly Daymark).
+
+## Contact
+
+- [Email](mailto:hello@freitagskind.app): General inquiries for freitagskind apps.
+
+## Optional
+
+- [GitHub organization](https://github.com/freitagskindapps): Source and open-source presence when relevant to developers.
