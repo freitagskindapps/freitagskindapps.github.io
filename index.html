@@ -1,188 +1,676 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="freitagskind apps — small, focused apps made with care." />
-  <title>freitagskind apps — thoughtful apps</title>
-
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="freitagskind apps — thoughtful apps" />
-  <meta property="og:description" content="Small, focused apps for people who want tools that work quietly and well." />
-  <meta property="og:url"         content="https://freitagskindapps.github.io/" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary" />
-  <meta name="twitter:title"       content="freitagskind apps — thoughtful apps" />
-  <meta name="twitter:description" content="Small, focused apps for people who want tools that work quietly and well." />
-
+  <title>freitagskind apps — Thoughtful Apps for Everyday Life</title>
+  <meta name="description" content="freitagskind apps creates thoughtful mobile tools that make everyday life simpler, calmer, and more fun." />
+  <link rel="canonical" href="https://freitagskindapps.github.io/" />
+  <meta name="theme-color" content="#144543" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://freitagskindapps.github.io/" />
+  <meta property="og:title" content="freitagskind apps — Thoughtful Apps for Everyday Life" />
+  <meta property="og:description" content="freitagskind apps creates thoughtful mobile tools that make everyday life simpler, calmer, and more fun." />
+  <meta property="og:image" content="https://freitagskindapps.github.io/freitagskind-apps-rectangle.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="freitagskind apps — Thoughtful Apps for Everyday Life" />
+  <meta name="twitter:description" content="freitagskind apps creates thoughtful mobile tools that make everyday life simpler, calmer, and more fun." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "freitagskind apps",
-    "url": "https://freitagskindapps.github.io/",
-    "logo": "https://freitagskindapps.github.io/freitagskind.png"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://freitagskindapps.github.io/#organization",
+        "name": "freitagskind apps",
+        "url": "https://freitagskindapps.github.io/",
+        "logo": "https://freitagskindapps.github.io/freitagskind-apps-rectangle.png",
+        "email": "hello@freitagskind.app",
+        "description": "Independent app studio building thoughtful mobile tools for everyday life."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://freitagskindapps.github.io/#website",
+        "url": "https://freitagskindapps.github.io/",
+        "name": "freitagskind apps",
+        "publisher": { "@id": "https://freitagskindapps.github.io/#organization" },
+        "inLanguage": "en"
+      }
+    ]
   }
   </script>
-
-  <!-- Favicon (inline SVG) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23D97706'/%3E%3Crect x='8' y='10' width='16' height='2.5' rx='1.25' fill='%23fff'/%3E%3Crect x='8' y='15' width='12' height='2.5' rx='1.25' fill='%23fff' opacity='.7'/%3E%3Crect x='8' y='20' width='14' height='2.5' rx='1.25' fill='%23fff' opacity='.45'/%3E%3C/svg%3E" />
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      /* Brand from freitagskind.png: dark teal */
+      --bg:        #FAFAF9;
+      --bg-alt:    #F0F5F4;
+      --border:    #E7E5E4;
+      --text:      #1C1917;
+      --text-2:    #57534E;
+      --text-3:    #A8A29E;
+      --brand:     #144543;
+      --brand-hover: #0F3634;
+      --brand-lt:  #E8F4F3;
+      --brand-md:  #4A9E96;
+      --green:     #0F766E;
+      --green-lt:  #ECFDF5;
+    }
 
-  <link rel="stylesheet" href="style.css" />
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ---- Tag / eyebrow ---- */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand-lt);
+      color: var(--brand);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(20,69,67,0.15);
+    }
+
+    /* ---- Buttons ---- */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 1px 3px rgba(20,69,67,0.25), 0 4px 12px rgba(20,69,67,0.15);
+    }
+    .btn-primary:hover {
+      background: var(--brand-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(20,69,67,0.3), 0 8px 20px rgba(20,69,67,0.2);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-alt);
+      border-color: #C7C3BF;
+      transform: translateY(-1px);
+    }
+
+    /* ---- Nav ---- */
+    .navbar {
+      background: rgba(250,250,249,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(231,229,228,0.8);
+    }
+
+    .nav-link {
+      color: var(--text-2);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s ease;
+      cursor: pointer;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    /* ---- Cards ---- */
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+      border-color: #D4D0CC;
+    }
+
+    /* ---- Icon container ---- */
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--brand-lt);
+      border: 1px solid rgba(20,69,67,0.12);
+    }
+
+    /* ---- Phone mockup ---- */
+    .phone {
+      width: 256px;
+      height: 520px;
+      border-radius: 42px;
+      background: #fff;
+      border: 1.5px solid #E7E5E4;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.06),
+        0 24px 64px rgba(0,0,0,0.14),
+        0 0 0 6px rgba(255,255,255,0.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 84px;
+      height: 24px;
+      background: #1C1917;
+      border-radius: 0 0 16px 16px;
+      z-index: 20;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---- Divider ---- */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ---- Animations ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0) rotate(2deg); }
+      50%       { transform: translateY(-9px) rotate(2deg); }
+    }
+    /* Floating shapes */
+    @keyframes shapeEntry {
+      from { opacity: 0; transform: translateY(-60px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shapeFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(14px); }
+    }
+
+    .h-anim-1 { animation: fadeUp 0.65s ease both; }
+    .h-anim-2 { animation: fadeUp 0.65s 0.1s ease both; }
+    .h-anim-3 { animation: fadeUp 0.65s 0.2s ease both; }
+    .h-anim-4 { animation: fadeUp 0.65s 0.32s ease both; }
+    .phone-float2 { animation: float2 4.5s 1s ease-in-out infinite; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .h-anim-1, .h-anim-2, .h-anim-3, .h-anim-4 { animation: none; opacity: 1; }
+      .phone-float2 { animation: none; }
+      .shape-inner { animation: none !important; opacity: 0.7 !important; transform: none !important; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---- Decorative dots grid ---- */
+    .dot-grid {
+      background-image: radial-gradient(circle, #D6D3D1 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* ---- Highlight text ---- */
+    .text-accent { color: var(--brand); }
+
+    /* ---- Pill badge ---- */
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-lt);
+      color: #0D9488;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(13,148,136,0.22);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      z-index: 100;
+      padding: 12px 16px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      left: 0;
+      top: 0;
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
 
-  <a href="#main" class="skip-link">Skip to content</a>
+<a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- ── Navigation ─────────────────────────────────────── -->
-  <nav class="nav" aria-label="Main navigation">
-    <a href="#top" class="nav__logo" aria-label="freitagskind apps — home">
-      <img src="freitagskind.png" alt="" width="1376" height="768" class="nav__logo-img" decoding="async" />
-    </a>
-    <ul class="nav__links">
-      <li><a href="#apps" class="nav__link">Apps</a></li>
-      <li><a href="#about" class="nav__link">About</a></li>
-    </ul>
-  </nav>
-
-  <main id="main">
-
-    <!-- ── Hero ───────────────────────────────────────────── -->
-    <header class="hero" id="top">
-      <div class="hero__bg" aria-hidden="true"></div>
-      <div class="hero__inner">
-        <div class="hero__visual">
-          <img
-            src="freitagskind.png"
-            alt="freitagskind apps"
-            width="1376"
-            height="768"
-            class="hero__logo"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </div>
-        <div class="hero__copy">
-          <p class="hero__eyebrow">Independent studio</p>
-          <h1 class="hero__title">Apps that get<br />out of the way.</h1>
-          <p class="hero__body">
-            We build small, focused apps for people who want tools
-            that work quietly and well.
-          </p>
-        </div>
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<header class="fixed top-0 left-0 right-0 z-50">
+  <nav class="navbar px-6 py-4 flex items-center justify-between mx-auto w-full" style="max-width:100%;" aria-label="Primary">
+    <div class="max-w-6xl w-full mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5 cursor-pointer">
+        <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="180" height="48" class="h-8 sm:h-9 w-auto max-h-10 object-contain object-left" />
+        <span class="font-semibold text-sm text-stone-800">freitagskind apps</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#apps"     class="nav-link">Apps</a>
+        <a href="#about"    class="nav-link">About</a>
+        <a href="#contact"  class="nav-link">Contact</a>
       </div>
-    </header>
-
-    <!-- ── Apps ───────────────────────────────────────────── -->
-    <section class="apps" id="apps" aria-labelledby="apps-heading">
-      <div class="container">
-        <h2 class="section-label" id="apps-heading">Our apps</h2>
-        <div class="apps__grid">
-
-          <!-- Tab -->
-          <article class="app-card">
-            <div class="app-card__icon" aria-hidden="true">
-              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="52" height="52" rx="14" fill="#FEF3C7" />
-                <rect x="14" y="17" width="24" height="3" rx="1.5" fill="#D97706" />
-                <rect x="14" y="24" width="18" height="3" rx="1.5" fill="#D97706" fill-opacity="0.6" />
-                <rect x="14" y="31" width="21" height="3" rx="1.5" fill="#D97706" fill-opacity="0.35" />
-              </svg>
-            </div>
-            <div class="app-card__body">
-              <h3 class="app-card__name">Tab</h3>
-              <p class="app-card__desc">
-                A calm way to keep track of what matters.
-                Simple, fast, and quiet by design.
-              </p>
-            </div>
-            <div class="app-card__footer" id="tab-card-footer">
-              <span class="badge">iOS</span>
-              <p class="app-card__note" id="tab-card-note" role="status">
-                App Store link will be added when Tab is available.
-              </p>
-            </div>
-          </article>
-
-          <!-- Coming soon -->
-          <article class="app-card app-card--soon">
-            <div class="app-card__icon" aria-hidden="true">
-              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="52" height="52" rx="14" fill="#F0EFEA" />
-                <circle cx="26" cy="26" r="9" stroke="#C4BFB9" stroke-width="2" />
-                <line x1="26" y1="21" x2="26" y2="26" stroke="#C4BFB9" stroke-width="2" stroke-linecap="round" />
-                <circle cx="26" cy="29.5" r="1.25" fill="#C4BFB9" />
-              </svg>
-            </div>
-            <div class="app-card__body">
-              <h3 class="app-card__name">More coming</h3>
-              <p class="app-card__desc">
-                We're working on something new.
-                Slowly and carefully.
-              </p>
-            </div>
-            <div class="app-card__footer">
-              <span class="badge badge--muted">Soon</span>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── About ───────────────────────────────────────────── -->
-    <section class="about" id="about" aria-labelledby="about-heading">
-      <div class="container">
-        <h2 class="section-label" id="about-heading">How we work</h2>
-        <div class="principles">
-
-          <div class="principle">
-            <h3 class="principle__title">Calm over clever</h3>
-            <p class="principle__body">
-              The best interface is one you stop noticing.
-              We build tools that serve their purpose and step aside.
-            </p>
-          </div>
-
-          <div class="principle">
-            <h3 class="principle__title">No tricks</h3>
-            <p class="principle__body">
-              No dark patterns. No false urgency. No confusing defaults.
-              Just honest software that does what it says.
-            </p>
-          </div>
-
-          <div class="principle">
-            <h3 class="principle__title">Made with care</h3>
-            <p class="principle__body">
-              Small team. Slow and deliberate. We ship when something
-              is ready — not when a roadmap says so.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── Footer ─────────────────────────────────────────── -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-      <p class="footer__brand">freitagskind apps</p>
-      <nav class="footer__links" aria-label="Footer navigation">
-        <a href="imprint.html" class="footer__link">Imprint</a>
-      </nav>
-      <p class="footer__copy">© 2026 freitagskind apps. Made with care.</p>
+      <a href="#apps" class="btn-primary" style="padding: 9px 18px; font-size: 0.8rem;">
+        Explore Apps
+      </a>
     </div>
-  </footer>
+  </nav>
+  <div class="section-divider"></div>
+</header>
 
-  <script src="main.js"></script>
+<main id="main">
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="relative overflow-hidden pt-28 pb-24 md:pt-40 md:pb-36" aria-labelledby="hero-heading">
+  <!-- Dot grid background -->
+  <div class="dot-grid absolute inset-0 opacity-35 pointer-events-none"></div>
+  <!-- Soft color wash -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(20,69,67,0.09) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <!-- ---- Floating elegant shapes (brand teal family) ---- -->
+  <!-- Shape 1: Large brand pill, upper-left -->
+  <div style="position:absolute;top:18%;left:-8%;width:560px;height:130px;transform:rotate(12deg);pointer-events:none;z-index:0;" aria-hidden="true">
+    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(20,69,67,0.12),transparent);border:1.5px solid rgba(20,69,67,0.14);opacity:0;animation:shapeEntry 2s 0.3s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 12s 2.3s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- Shape 2: Soft seafoam, lower-right -->
+  <div style="position:absolute;top:62%;right:-5%;width:480px;height:112px;transform:rotate(-15deg);pointer-events:none;z-index:0;" aria-hidden="true">
+    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(74,158,150,0.14),transparent);border:1.5px solid rgba(74,158,150,0.18);opacity:0;animation:shapeEntry 2s 0.5s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 10s 2.5s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- Shape 3: Deep teal pill, lower-left -->
+  <div style="position:absolute;bottom:8%;left:6%;width:280px;height:72px;transform:rotate(-8deg);pointer-events:none;z-index:0;" aria-hidden="true">
+    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(15,54,52,0.1),transparent);border:1.5px solid rgba(20,69,67,0.12);opacity:0;animation:shapeEntry 2s 0.4s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 14s 2.4s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- Shape 4: Mint accent, upper-right -->
+  <div style="position:absolute;top:10%;right:16%;width:190px;height:54px;transform:rotate(20deg);pointer-events:none;z-index:0;" aria-hidden="true">
+    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(45,107,102,0.12),transparent);border:1.5px solid rgba(45,107,102,0.16);opacity:0;animation:shapeEntry 2s 0.6s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 9s 2.6s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- Shape 5: Bright teal pill, upper-center -->
+  <div style="position:absolute;top:6%;left:26%;width:145px;height:42px;transform:rotate(-25deg);pointer-events:none;z-index:0;" aria-hidden="true">
+    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(13,148,136,0.13),transparent);border:1.5px solid rgba(13,148,136,0.18);opacity:0;animation:shapeEntry 2s 0.7s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 11s 2.7s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- Centered text content -->
+  <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+    <span class="tag h-anim-1 mb-6 inline-flex">
+      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
+      Independent App Studio
+    </span>
+    <h1 id="hero-heading" class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight mt-5 h-anim-2">
+      Build better days,<br/>
+      <span class="text-accent">one app at a time.</span>
+    </h1>
+    <p class="mt-6 text-stone-500 text-lg leading-relaxed max-w-xl mx-auto h-anim-3">
+      Thoughtful mobile tools that make everyday life simpler, calmer, and more fun.
+    </p>
+    <div class="mt-9 flex flex-wrap gap-3 justify-center h-anim-4">
+      <a href="#apps"    class="btn-primary">Explore Our Apps</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     WHAT WE DO
+============================================================ -->
+<div class="section-divider"></div>
+<section style="background:var(--bg-alt);" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl reveal">
+      <span class="tag mb-5">What We Do</span>
+      <h2 class="text-4xl font-extrabold tracking-tight leading-tight mt-4 mb-5">
+        Small apps. Real impact.
+      </h2>
+      <p class="text-stone-500 text-lg leading-relaxed">
+        We focus on utility-first apps that solve clear problems quickly. No bloated features, no complexity for complexity's sake - just clean, practical experiences people actually use.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mt-14">
+      <div class="card p-7 reveal" style="transition-delay:0.05s;">
+        <div class="icon-box mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#144543" class="w-5 h-5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base mb-2">Focused utility</h3>
+        <p class="text-stone-400 text-sm leading-relaxed">Apps that do one thing exceptionally well. No feature creep, no subscription traps.</p>
+      </div>
+      <div class="card p-7 reveal" style="transition-delay:0.1s;">
+        <div class="icon-box mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#144543" class="w-5 h-5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base mb-2">Premium craft</h3>
+        <p class="text-stone-400 text-sm leading-relaxed">Thoughtful UI details and delightful interactions. Every pixel earns its place.</p>
+      </div>
+      <div class="card p-7 reveal" style="transition-delay:0.17s;">
+        <div class="icon-box mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#144543" class="w-5 h-5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-base mb-2">Built for humans</h3>
+        <p class="text-stone-400 text-sm leading-relaxed">Real problems, real people. Every app starts with a daily frustration worth solving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FEATURED APP: PENDULA
+============================================================ -->
+<div class="section-divider"></div>
+<section id="apps" class="py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+      <!-- Phone -->
+      <div class="flex justify-center order-2 lg:order-1 reveal">
+        <div class="phone-float2" style="position:relative;">
+          <div class="phone" style="width:248px;height:505px;">
+            <div class="phone-notch"></div>
+            <div class="phone-screen" style="background:linear-gradient(155deg,#0A1212 0%,#0F1F1E 55%,#0A1212 100%);">
+              <div style="position:absolute;width:210px;height:210px;background:radial-gradient(circle,rgba(20,69,67,0.35) 0%,transparent 65%);top:-55px;left:-55px;border-radius:50%;pointer-events:none;"></div>
+              <div style="position:absolute;width:150px;height:150px;background:radial-gradient(circle,rgba(74,158,150,0.22) 0%,transparent 65%);bottom:50px;right:-25px;border-radius:50%;pointer-events:none;"></div>
+
+              <div style="position:relative;z-index:10;padding:48px 16px 18px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+                <!-- Widget card -->
+                <div style="width:100%;background:linear-gradient(135deg,rgba(20,69,67,0.22),rgba(74,158,150,0.1));border:1px solid rgba(74,158,150,0.28);border-radius:26px;padding:20px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+                  <!-- Ring -->
+                  <div style="width:116px;height:116px;position:relative;margin-bottom:10px;">
+                    <svg width="116" height="116" style="transform:rotate(-90deg);">
+                      <defs>
+                        <linearGradient id="ig2" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#144543"/>
+                          <stop offset="100%" stop-color="#4A9E96"/>
+                        </linearGradient>
+                      </defs>
+                      <circle cx="58" cy="58" r="50" stroke="rgba(255,255,255,0.07)" stroke-width="8" fill="none"/>
+                      <circle cx="58" cy="58" r="50" stroke="url(#ig2)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="79"/>
+                    </svg>
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+                      <div style="font-weight:800;font-size:2.2rem;line-height:1;color:#7ECBC4;">47</div>
+                      <div style="color:rgba(255,255,255,0.35);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;">days</div>
+                    </div>
+                  </div>
+                  <p style="color:#FAF9F7;font-weight:700;font-size:14px;">Summer Holiday</p>
+                  <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:3px;">July 14, 2026</p>
+                </div>
+                <!-- Small row -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;">
+                  <div style="background:rgba(20,69,67,0.2);border:1px solid rgba(74,158,150,0.28);border-radius:18px;padding:11px 10px;text-align:center;">
+                    <div style="font-weight:700;font-size:21px;color:#FAF9F7;line-height:1;">12</div>
+                    <div style="color:rgba(255,255,255,0.3);font-size:10px;margin-top:3px;">Mom's B-Day</div>
+                  </div>
+                  <div style="background:rgba(13,148,136,0.14);border:1px solid rgba(13,148,136,0.28);border-radius:18px;padding:11px 10px;text-align:center;">
+                    <div style="font-weight:700;font-size:21px;color:#FAF9F7;line-height:1;">89</div>
+                    <div style="color:rgba(255,255,255,0.3);font-size:10px;margin-top:3px;">Team Trip</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:150px;height:26px;background:rgba(20,69,67,0.28);filter:blur(18px);border-radius:50%;pointer-events:none;"></div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="order-1 lg:order-2 reveal">
+        <span class="tag mb-5">Featured App</span>
+        <div class="flex items-center gap-3 mt-4 mb-2">
+          <h2 class="text-5xl font-extrabold tracking-tight">Pendula</h2>
+          <span class="app-badge">Android</span>
+        </div>
+        <p class="text-stone-400 text-sm italic mb-7">formerly Daymark</p>
+        <p class="text-stone-500 text-lg leading-relaxed mb-8">
+          A countdown widget app designed to keep your important moments visible and motivating. From birthdays and trips to personal goals, Pendula helps you stay connected to what matters.
+        </p>
+        <!-- Feature list -->
+        <ul class="space-y-3 mb-10" role="list">
+          <li class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-stone-600 text-sm">Beautiful widgets with circular progress rings</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-stone-600 text-sm">Category color-coding for instant visual hierarchy</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-stone-600 text-sm">Premium dark aesthetic with gradient accents</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-stone-600 text-sm">Free to download on Android</span>
+          </li>
+        </ul>
+        <!-- When the public Play Store listing URL is finalized, replace #contact with the store link and add rel="noopener noreferrer". -->
+        <a href="#contact" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18h3" />
+          </svg>
+          Learn More About Pendula
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HOW WE BUILD
+============================================================ -->
+<div class="section-divider"></div>
+<section id="approach" style="background:var(--bg-alt);" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="tag mb-5">Our Approach</span>
+      <h2 class="text-4xl font-extrabold tracking-tight mt-4">How we build</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-8 reveal" style="transition-delay:0.05s;">
+        <div class="text-5xl font-extrabold mb-6" style="color:rgba(20,69,67,0.12);letter-spacing:-2px;">01</div>
+        <h3 class="font-bold text-lg mb-3">Problem First</h3>
+        <p class="text-stone-400 text-sm leading-relaxed">We start with real daily frustrations, not trends. Every app we build exists because someone needed it.</p>
+      </div>
+      <div class="card p-8 reveal" style="transition-delay:0.12s;">
+        <div class="text-5xl font-extrabold mb-6" style="color:rgba(20,69,67,0.12);letter-spacing:-2px;">02</div>
+        <h3 class="font-bold text-lg mb-3">Simple by Design</h3>
+        <p class="text-stone-400 text-sm leading-relaxed">We remove friction until the app feels obvious. The best UX is the one you don't notice.</p>
+      </div>
+      <div class="card p-8 reveal" style="transition-delay:0.2s;">
+        <div class="text-5xl font-extrabold mb-6" style="color:rgba(20,69,67,0.12);letter-spacing:-2px;">03</div>
+        <h3 class="font-bold text-lg mb-3">Built to Last</h3>
+        <p class="text-stone-400 text-sm leading-relaxed">Reliable architecture, clean UX, and continuous improvement. We ship things we're proud of.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<div class="section-divider"></div>
+<section id="about" class="py-24" aria-labelledby="about-heading">
+  <div class="max-w-3xl mx-auto px-6 text-center reveal">
+    <span class="tag mb-5">About</span>
+    <h2 id="about-heading" class="text-4xl font-extrabold tracking-tight leading-tight mt-4 mb-7">
+      Independent. Practical.<br/>
+      <span class="text-accent">Human-centered.</span>
+    </h2>
+    <p class="text-stone-500 text-lg leading-relaxed">
+      freitagskind apps is an independent app studio focused on meaningful digital products. Our goal is to create tools people open every day because they are genuinely useful - not because dark patterns force them to.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT CTA
+============================================================ -->
+<div class="section-divider"></div>
+<section id="contact" style="background:var(--bg-alt);" class="py-24">
+  <div class="max-w-3xl mx-auto px-6 text-center reveal">
+    <h2 class="text-4xl font-extrabold tracking-tight leading-tight mb-5">
+      Let's build something<br/>
+      <span class="text-accent">people love.</span>
+    </h2>
+    <p class="text-stone-500 text-lg mb-10 max-w-md mx-auto">
+      Have an app idea, a collaboration in mind, or just want to say hi?
+    </p>
+    <a href="mailto:hello@freitagskind.app" class="btn-primary" style="font-size:0.9rem;padding:14px 28px;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+      </svg>
+      Contact freitagskind apps
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<div class="section-divider"></div>
+<footer class="py-10" style="background:#fff;">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5">
+    <div class="flex items-center gap-2.5">
+      <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="160" height="40" class="h-6 w-auto max-h-8 object-contain object-left opacity-90" />
+      <div>
+        <p class="text-stone-700 text-sm font-semibold">freitagskind apps</p>
+        <p class="text-stone-400 text-xs">Thoughtful apps for everyday life.</p>
+      </div>
+    </div>
+    <nav class="flex flex-wrap items-center justify-center gap-x-7 gap-y-2" aria-label="Footer navigation">
+      <a href="#apps"     class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer">Apps</a>
+      <a href="#approach" class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer">Approach</a>
+      <a href="#about"    class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer">About</a>
+      <a href="#contact"  class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer">Contact</a>
+      <a href="imprint.html" class="text-stone-400 text-sm hover:text-stone-700 transition-colors">Imprint</a>
+    </nav>
+    <p class="text-stone-300 text-xs">&copy; 2026 freitagskind apps.</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.transition = 'none';
+    });
+  }
+</script>
+
 </body>
 </html>
