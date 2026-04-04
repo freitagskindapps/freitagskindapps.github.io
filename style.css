@@ -1,9 +1,10 @@
 /* ── Tokens (brand: freitagskind apps; logo: freitagskind.png) ── */
 :root {
-  --color-bg:           #FAFAF8;
-  --color-surface:      #F2F0EB;
+  --color-bg:           #F7F5F2;
+  --color-bg-elevated:  #FFFCF7;
+  --color-surface:      #EFEAE3;
   --color-surface-card: #FFFFFF;
-  --color-border:       #E8E5E1;
+  --color-border:       #E4E0D8;
 
   --color-text:         #1C1917;
   --color-text-muted:   #78716C;
@@ -11,7 +12,9 @@
 
   /* Warm amber — primary brand accent; matches mark in freitagskind.png */
   --color-accent:       #D97706;
+  --color-accent-soft:  rgba(217, 119, 6, 0.12);
   --color-accent-dim:   #FEF3C7;
+  --color-accent-deep:  #B45309;
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
@@ -19,8 +22,9 @@
   --radius-card: 16px;
   --radius-pill: 999px;
 
-  --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 6px 28px rgba(0, 0, 0, 0.10);
+  --shadow-card: 0 2px 16px rgba(28, 25, 23, 0.06);
+  --shadow-card-hover: 0 6px 28px rgba(28, 25, 23, 0.10);
+  --shadow-hero-logo: 0 24px 48px rgba(180, 83, 9, 0.12);
 
   --transition-base: 200ms ease;
 }
@@ -40,7 +44,9 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--color-bg);
+  background:
+    radial-gradient(120% 80% at 50% -10%, var(--color-accent-soft) 0%, transparent 55%),
+    var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -147,9 +153,60 @@ button:focus-visible {
 
 /* ── Hero ─────────────────────────────────────────────────────── */
 .hero {
-  padding: 96px 24px 80px;
-  max-width: 960px;
+  position: relative;
+  padding: 48px 24px 88px;
+  max-width: 1100px;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 70% 20%, var(--color-accent-soft) 0%, transparent 50%),
+    linear-gradient(180deg, var(--color-bg-elevated) 0%, transparent 42%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 12% 8% auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-accent) 35%, transparent),
+    transparent
+  );
+  opacity: 0.9;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.hero__visual {
+  min-width: 0;
+}
+
+.hero__logo {
+  width: 100%;
+  max-width: min(100%, 520px);
+  height: auto;
+  margin: 0;
+  filter: drop-shadow(var(--shadow-hero-logo));
+}
+
+.hero__copy {
+  min-width: 0;
 }
 
 .hero__eyebrow {
@@ -157,13 +214,13 @@ button:focus-visible {
   font-weight: 500;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-deep);
   margin-bottom: 20px;
 }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6.5vw, 4.75rem);
+  font-size: clamp(2.35rem, 5.8vw, 4.25rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.035em;
@@ -174,7 +231,7 @@ button:focus-visible {
 .hero__body {
   font-size: 1.125rem;
   color: var(--color-text-muted);
-  max-width: 500px;
+  max-width: 420px;
   line-height: 1.75;
 }
 
@@ -215,6 +272,7 @@ button:focus-visible {
 .app-card:hover {
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-accent) 22%, var(--color-border));
 }
 
 .app-card--soon {
@@ -296,7 +354,7 @@ button:focus-visible {
 }
 
 .app-card__cta:hover {
-  background: #b45309;
+  background: var(--color-accent-deep);
   color: #fff;
 }
 
@@ -428,13 +486,28 @@ button:focus-visible {
 }
 
 /* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero__visual {
+    order: -1;
+  }
+
+  .hero__logo {
+    max-width: min(100%, 420px);
+  }
+}
+
 @media (max-width: 640px) {
   .nav {
     padding: 14px 16px;
   }
 
   .hero {
-    padding: 64px 16px 56px;
+    padding: 32px 16px 56px;
   }
 
   .apps {
