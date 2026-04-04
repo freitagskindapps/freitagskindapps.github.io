@@ -73,6 +73,33 @@
       outline: 2px solid #fff;
       outline-offset: 2px;
     }
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.92);
+    }
+    .lang-switch__btn {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .lang-switch__btn:hover { color: var(--text); }
+    .lang-switch__btn--active,
+    .lang-switch__btn[aria-pressed="true"] {
+      background: #E8F4F3;
+      color: var(--brand);
+    }
     .imprint-heading {
       font-size: 0.8rem;
       font-weight: 600;
@@ -91,7 +118,7 @@
 </head>
 <body>
 
-<a href="#main" class="skip-link">Skip to main content</a>
+<a href="#main" class="skip-link" data-i18n="skip.main">Skip to main content</a>
 
 <header class="fixed top-0 left-0 right-0 z-50">
   <nav class="navbar px-6 py-4 flex items-center justify-between mx-auto w-full" style="max-width:100%;" aria-label="Primary">
@@ -101,13 +128,19 @@
         <span class="font-semibold text-sm text-stone-800">freitagskind apps</span>
       </a>
       <div class="hidden md:flex items-center gap-8">
-        <a href="index.html#apps" class="nav-link">Apps</a>
-        <a href="index.html#about" class="nav-link">About</a>
-        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="index.html#apps" class="nav-link" data-i18n="nav.apps">Apps</a>
+        <a href="index.html#about" class="nav-link" data-i18n="nav.about">About</a>
+        <a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
       </div>
-      <a href="index.html#apps" class="inline-flex items-center gap-2 rounded-xl px-[18px] py-[9px] text-[0.8rem] font-semibold text-white shadow-sm transition hover:opacity-95" style="background:var(--brand);box-shadow:0 1px 3px rgba(20,69,67,0.25);">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-switch__btn" data-lang-set="de" aria-pressed="false">DE</button>
+          <button type="button" class="lang-switch__btn" data-lang-set="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="index.html#apps" class="inline-flex items-center gap-2 rounded-xl px-[18px] py-[9px] text-[0.8rem] font-semibold text-white shadow-sm transition hover:opacity-95" style="background:var(--brand);box-shadow:0 1px 3px rgba(20,69,67,0.25);" data-i18n="nav.explore">
         Explore Apps
       </a>
+      </div>
     </div>
   </nav>
   <div class="section-divider"></div>
@@ -115,12 +148,12 @@
 
 <main id="main" class="pt-28 pb-16 md:pt-36">
   <div class="max-w-2xl mx-auto px-6">
-    <p class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-3">Legal</p>
-    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-stone-900 mb-10">Imprint</h1>
+    <p class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-3" data-i18n="imprint.kicker">Legal</p>
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-stone-900 mb-10" data-i18n="imprint.h1">Imprint</h1>
 
     <div class="space-y-10">
       <section aria-labelledby="imprint-tmg">
-        <h2 id="imprint-tmg" class="imprint-heading">Information according to § 5 TMG</h2>
+        <h2 id="imprint-tmg" class="imprint-heading" data-i18n="imprint.tmg">Information according to § 5 TMG</h2>
         <address class="imprint-address">
           Maximilian Freitag<br />
           Rudolf-Zenker-Str. 5<br />
@@ -130,13 +163,13 @@
       </section>
 
       <section aria-labelledby="imprint-rstv">
-        <h2 id="imprint-rstv" class="imprint-heading">Responsible for content (§ 55 Abs. 2 RStV)</h2>
-        <p>Maximilian Freitag</p>
+        <h2 id="imprint-rstv" class="imprint-heading" data-i18n="imprint.rstv">Responsible for content (§ 55 Abs. 2 RStV)</h2>
+        <p data-i18n="imprint.rstv.p">Maximilian Freitag</p>
       </section>
 
       <section class="pt-10 border-t border-stone-200" aria-labelledby="imprint-disclaimer">
-        <h2 id="imprint-disclaimer" class="imprint-heading">Disclaimer</h2>
-        <p>
+        <h2 id="imprint-disclaimer" class="imprint-heading" data-i18n="imprint.disclaimer.h">Disclaimer</h2>
+        <p data-i18n="imprint.disclaimer.p">
           Despite careful content control, we assume no liability for the
           content of external links. The operators of the linked pages are
           solely responsible for their content.
@@ -153,19 +186,20 @@
       <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="160" height="40" class="h-6 w-auto max-h-8 object-contain object-left opacity-90" />
       <div>
         <p class="text-stone-700 text-sm font-semibold">freitagskind apps</p>
-        <p class="text-stone-400 text-xs">Thoughtful apps for everyday life.</p>
+        <p class="text-stone-400 text-xs" data-i18n="footer.line">Thoughtful apps for everyday life.</p>
       </div>
     </div>
     <nav class="flex flex-wrap items-center justify-center gap-x-7 gap-y-2" aria-label="Footer navigation">
-      <a href="index.html#apps" class="text-stone-400 text-sm hover:text-stone-700 transition-colors">Apps</a>
-      <a href="index.html#approach" class="text-stone-400 text-sm hover:text-stone-700 transition-colors">Approach</a>
-      <a href="index.html#about" class="text-stone-400 text-sm hover:text-stone-700 transition-colors">About</a>
-      <a href="index.html#contact" class="text-stone-400 text-sm hover:text-stone-700 transition-colors">Contact</a>
-      <a href="imprint.html" class="text-stone-400 text-sm hover:text-stone-700 transition-colors">Imprint</a>
+      <a href="index.html#apps" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="nav.apps">Apps</a>
+      <a href="index.html#approach" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="footer.approach">Approach</a>
+      <a href="index.html#about" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="nav.about">About</a>
+      <a href="index.html#contact" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="nav.contact">Contact</a>
+      <a href="imprint.html" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="footer.imprint">Imprint</a>
     </nav>
-    <p class="text-stone-300 text-xs">&copy; 2026 freitagskind apps.</p>
+    <p class="text-stone-300 text-xs" data-i18n="footer.copy">&copy; 2026 freitagskind apps.</p>
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 </body>
 </html>
