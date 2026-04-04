@@ -4,6 +4,25 @@
 (function () {
   'use strict';
 
+  // When Tab has an App Store or public web URL, set this to show the primary CTA on the card.
+  var FREITAGSKIND_TAB_APP_STORE_URL = '';
+
+  (function initTabCardCta() {
+    var url = typeof FREITAGSKIND_TAB_APP_STORE_URL === 'string' ? FREITAGSKIND_TAB_APP_STORE_URL.trim() : '';
+    var note = document.getElementById('tab-card-note');
+    if (!url || !note) return;
+
+    var a = document.createElement('a');
+    a.className = 'app-card__cta';
+    a.href = url;
+    a.textContent = 'View on the App Store';
+    if (/^https?:\/\//i.test(url)) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+    note.replaceWith(a);
+  })();
+
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (prefersReducedMotion) return;
