@@ -90,7 +90,7 @@
     de: {
       'meta.title': 'freitagskind apps — Durchdachte Apps für den Alltag',
       'meta.description':
-        'freitagskind apps entwickelt durchdachte mobile Hilfen, die den Alltag einfacher, ruhiger und lebenswerter machen.',
+        'freitagskind apps entwickelt durchdachte mobile Hilfen, die den Alltag einfacher, ruhiger und angenehmer machen.',
       'skip.main': 'Zum Hauptinhalt springen',
       'nav.apps': 'Apps',
       'nav.about': 'Über uns',
@@ -101,19 +101,19 @@
       'hero.line1': 'Mach dir bessere Tage,',
       'hero.line2': 'eine App nach der anderen.',
       'hero.sub':
-        'Durchdachte mobile Hilfen, die den Alltag einfacher, ruhiger und lebenswerter machen.',
+        'Durchdachte mobile Hilfen, die den Alltag einfacher, ruhiger und angenehmer machen.',
       'hero.cta1': 'Unsere Apps entdecken',
       'hero.cta2': 'Kontakt aufnehmen',
       'what.tag': 'Was wir tun',
       'what.h2': 'Kleine Apps. Echte Wirkung.',
       'what.p':
         'Wir konzentrieren uns auf nützliche Apps, die klare Probleme schnell lösen. Keine aufgeblähten Funktionen, keine Komplexität um der Komplexität willen — sondern klare, praktische Erlebnisse, die Menschen wirklich nutzen.',
-      'what.c1t': 'Fokussierte Nützlichkeit',
+      'what.c1t': 'Klarer Nutzen',
       'what.c1p':
         'Apps, die eine Sache besonders gut machen. Kein Feature-Creep, keine Abo-Fallen.',
-      'what.c2t': 'Premium-Handwerk',
+      'what.c2t': 'Liebe zum Detail',
       'what.c2p':
-        'Durchdachte UI-Details und kleine Freuden beim Bedienen. Jedes Pixel hat seinen Platz.',
+        'Durchdachte UI-Details und kleine Freuden beim Nutzen. Jedes Pixel hat seinen Platz.',
       'what.c3t': 'Für Menschen gebaut',
       'what.c3p':
         'Echte Probleme, echte Menschen. Jede App entsteht aus einem Alltagsärgernis, das es wert ist, gelöst zu werden.',
@@ -121,7 +121,7 @@
       'feat.badge': 'Android',
       'feat.formerly': 'ehemals Daymark',
       'feat.desc':
-        'Eine Countdown-Widget-App, die deine wichtigsten Momente sichtbar und motivierend hält. Von Geburtstagen und Reisen bis zu persönlichen Zielen — Pendula hilft dir, mit dem Verbunden zu bleiben, was zählt.',
+        'Eine Countdown-Widget-App, die deine wichtigsten Momente sichtbar und motivierend vor Augen hält. Von Geburtstagen und Reisen bis zu persönlichen Zielen — Pendula hilft dir dabei, mit dem, was zählt, verbunden zu bleiben.',
       'feat.li1': 'Schöne Widgets mit kreisförmigen Fortschrittsringen',
       'feat.li2': 'Farbige Kategorien für sofortige visuelle Orientierung',
       'feat.li3': 'Premium-Dark-Look mit Farbverläufen',
@@ -136,8 +136,8 @@
       'approach.h2': 'So entwickeln wir',
       'ap1.t': 'Problem zuerst',
       'ap1.p':
-        'Wir starten mit echten Alltagsfrust, nicht mit Trends. Jede App gibt es, weil sie jemand gebraucht hat.',
-      'ap2.t': 'Einfach by Design',
+        'Wir starten mit echtem Alltagsfrust, nicht mit Trends. Jede App gibt es, weil sie jemand gebraucht hat.',
+      'ap2.t': 'Einfachheit als Prinzip',
       'ap2.p':
         'Wir nehmen Reibung weg, bis sich die App selbstverständlich anfühlt. Die beste UX ist die, die man nicht merkt.',
       'ap3.t': 'Gebaut, um zu bleiben',
@@ -268,7 +268,7 @@
   function dictOrgDesc(lang) {
     if (!STRINGS[lang]) return '';
     return lang === 'de'
-      ? 'Unabhängiges App-Studio mit durchdachten mobilen Hilfen für den Alltag.'
+      ? 'Unabhängiges App-Studio mit durchdachten Apps für den Alltag.'
       : 'Independent app studio building thoughtful mobile tools for everyday life.';
   }
 
