@@ -15,25 +15,24 @@ export default function Home() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div className="min-h-dvh overflow-x-hidden" style={{ fontFamily: 'var(--font-geist-sans)', backgroundColor: 'var(--color-zinc-50)', color: '#18181B' }}>
+    <div className="min-h-dvh overflow-x-hidden bg-zinc-50 text-zinc-900 selection:bg-amber-100 selection-text-amber-900">
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        style={{ backgroundColor: 'rgba(250, 250, 248, 0.8)', backdropFilter: 'blur(24px)', borderColor: 'rgba(228, 228, 230, 0.5)' }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 border"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-zinc-50/80 backdrop-blur-xl border-b border-zinc-200/50"
       >
-        <a href="#top" className="flex items-center gap-2 text-zinc-900 font-medium" style={{ textDecoration: 'none' }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--color-amber-500)' }}>
+        <a href="#top" className="flex items-center gap-2 text-zinc-900 font-medium no-underline">
+          <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
             <div className="w-4 h-1 bg-white rounded-full" />
           </div>
           <span className="text-lg">freitagskind</span>
         </a>
         <div className="flex items-center gap-6">
-          <a href="#apps" className="text-sm text-zinc-600" style={{ color: 'var(--color-zinc-600)' }}>
+          <a href="#apps" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors no-underline">
             Apps
           </a>
-          <a href="#about" className="text-sm text-zinc-600" style={{ color: 'var(--color-zinc-600)' }}>
+          <a href="#about" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors no-underline">
             About
           </a>
         </div>
@@ -64,7 +63,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 text-amber-700 text-sm font-medium rounded-full" style={{ backgroundColor: 'var(--color-amber-50)', color: 'var(--color-amber-700)' }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 text-sm font-medium rounded-full"
               >
                 <Sparkles className="w-4 h-4" />
                 Thoughtful software
@@ -74,18 +73,18 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="text-6xl md:text-7xl font-bold tracking-tighter" style={{ lineHeight: '1.05', fontWeight: 600, letterSpacing: '-0.025em' }}
+                className="text-6xl md:text-7xl font-bold tracking-tighter leading-none text-zinc-900"
               >
                 Apps that get
                 <br />
-                <span style={{ color: 'var(--color-amber-500)' }}>out of the way.</span>
+                <span className="text-amber-500">out of the way.</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="text-xl leading-relaxed max-w-lg" style={{ color: 'var(--color-zinc-600)', lineHeight: 1.6 }}
+                className="text-xl text-zinc-600 leading-relaxed max-w-lg"
               >
                 We build small, focused apps for people who want tools
                 that work quietly and well.
@@ -101,10 +100,7 @@ export default function Home() {
                   href="#apps"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2 text-white px-6 py-3 rounded-full font-medium cursor-pointer" style={{ backgroundColor: 'var(--color-amber-500)', textDecoration: 'none', transition: 'color 0.2s cubic-bezier(0.16, 1, 0.3, 1)' }}
-                  style={{ '--hover-bg': '#B36B04' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#B36B04'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--color-amber-500)'}
+                  className="flex items-center gap-2 bg-amber-500 text-white px-6 py-3 rounded-full font-medium hover:bg-amber-600 transition-colors cursor-pointer no-underline"
                 >
                   Explore Apps
                   <ArrowRight className="w-4 h-4" />
@@ -131,9 +127,9 @@ export default function Home() {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className="absolute -top-8 -right-8 bg-white rounded-2xl shadow-xl p-6 border" style={{ boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', borderColor: 'var(--color-zinc-100)' }}
+                  className="absolute -top-8 -right-8 bg-white rounded-2xl shadow-xl p-6 border border-zinc-100"
                 >
-                  <Smartphone className="w-8 h-8" style={{ color: 'var(--color-amber-500)' }} />
+                  <Smartphone className="w-8 h-8 text-amber-500" />
                 </motion.div>
 
                 <motion.div
@@ -147,15 +143,15 @@ export default function Home() {
                     ease: "easeInOut",
                     delay: 0.5,
                   }}
-                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-6 border" style={{ boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', borderColor: 'var(--color-zinc-100)' }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-6 border border-zinc-100"
                 >
-                  <Heart className="w-8 h-8" style={{ color: '#ED8936' }} />
+                  <Heart className="w-8 h-8 text-amber-500" />
                 </motion.div>
 
                 {/* Main card */}
-                <div className="bg-gradient-to-br-from-white-to-amber-50 rounded-3xl p-8 shadow-2xl border" style={{ background: 'linear-gradient(to bottom right, var(--color-white), var(--color-amber-50))', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', borderColor: 'rgba(244, 244, 245, 0.5)' }}>
+                <div className="bg-gradient-to-br from-white to-amber-50/30 rounded-3xl p-8 shadow-2xl border border-zinc-100/50">
                   <div className="flex items-center justify-center h-64">
-                    <Clock className="w-24 h-24" style={{ color: 'rgba(217, 119, 6, 0.8)' }} />
+                    <Clock className="w-24 h-24 text-amber-500/80" />
                   </div>
                 </div>
               </div>
@@ -184,26 +180,26 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               whileHover={{ y: -4 }}
-              className="group bg-white rounded-2xl p-8 shadow-sm border cursor-pointer" style={{ backgroundColor: 'var(--color-white)', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)', borderColor: 'var(--color-zinc-100)' }}
+              className="group bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl transition-shadow cursor-pointer"
             >
               <div className="flex items-start justify-between mb-6">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'var(--color-amber-50)' }}>
-                  <div className="w-6 h-6 rounded" style={{ backgroundColor: 'var(--color-amber-500)' }} />
+                <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center">
+                  <div className="w-6 h-6 bg-amber-500 rounded" />
                 </div>
-                <span className="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs font-medium rounded-full" style={{ backgroundColor: 'var(--color-zinc-100)', color: 'var(--color-zinc-600)' }}>
+                <span className="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs font-medium rounded-full">
                   iOS
                 </span>
               </div>
 
-              <h3 className="text-2xl font-semibold mb-3 text-zinc-900" style={{ color: 'var(--color-zinc-900)', fontWeight: 600 }}>Tab</h3>
-              <p className="text-zinc-600 leading-relaxed" style={{ color: 'var(--color-zinc-600)', lineHeight: 1.6 }}>
+              <h3 className="text-2xl font-semibold mb-3 text-zinc-900">Tab</h3>
+              <p className="text-zinc-600 leading-relaxed">
                 A calm way to keep track of what matters. Simple, fast, and quiet by design.
               </p>
 
               <motion.div
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
-                className="flex items-center gap-2 text-amber-700 font-medium text-sm mt-4" style={{ color: 'var(--color-amber-700)' }}
+                className="flex items-center gap-2 text-amber-500 font-medium text-sm mt-4"
               >
                 Learn more
                 <ArrowRight className="w-4 h-4" />
@@ -216,19 +212,19 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="group bg-gradient-to-br-from-amber-50-to-amber-100 rounded-2xl p-8 shadow-sm border" style={{ background: 'linear-gradient(to bottom right, var(--color-amber-50), var(--color-amber-100))', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)', borderColor: 'rgba(254, 243, 199, 0.5)' }}
+              className="group bg-gradient-to-br from-amber-50 to-white rounded-2xl p-8 shadow-sm border border-amber-100/50 hover:shadow-xl transition-shadow"
             >
               <div className="flex items-start justify-between mb-6">
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm" style={{ backgroundColor: 'var(--color-white)', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)' }}>
-                  <Clock className="w-8 h-8" style={{ color: '#ED8936' }} />
+                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+                  <Clock className="w-8 h-8 text-amber-500" />
                 </div>
-                <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full" style={{ backgroundColor: 'var(--color-amber-100)', color: 'var(--color-amber-700)' }}>
+                <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
                   Coming soon
                 </span>
               </div>
 
-              <h3 className="text-2xl font-semibold mb-3 text-zinc-900" style={{ color: 'var(--color-zinc-900)', fontWeight: 600 }}>More coming</h3>
-              <p className="text-zinc-600 leading-relaxed" style={{ color: 'var(--color-zinc-600)', lineHeight: 1.6 }}>
+              <h3 className="text-2xl font-semibold mb-3 text-zinc-900">More coming</h3>
+              <p className="text-zinc-600 leading-relaxed">
                 We're working on something new. Slowly and carefully.
               </p>
             </motion.article>
@@ -237,7 +233,7 @@ export default function Home() {
       </section>
 
       {/* About/Principles Section */}
-      <section id="about" className="py-32" style={{ backgroundColor: 'var(--color-white)' }}>
+      <section id="about" className="py-32 bg-white">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -272,16 +268,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="space-y-4 p-6 rounded-2xl hover:bg-zinc-50" style={{ transition: 'color 0.2s cubic-bezier(0.16, 1, 0.3, 1)' }}
-                style={{ '--hover-bg': 'var(--color-zinc-50)' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-zinc-50)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                className="space-y-4 p-6 rounded-2xl hover:bg-zinc-50 transition-colors"
               >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--color-amber-50)' }}>
+                <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center">
                   {principle.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-zinc-900" style={{ color: 'var(--color-zinc-900)', fontWeight: 600 }}>{principle.title}</h3>
-                <p className="text-zinc-600 leading-relaxed" style={{ color: 'var(--color-zinc-600)', lineHeight: 1.6 }}>{principle.description}</p>
+                <h3 className="text-xl font-semibold text-zinc-900">{principle.title}</h3>
+                <p className="text-zinc-600 leading-relaxed">{principle.description}</p>
               </motion.div>
             ))}
           </div>
@@ -289,12 +282,12 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t" style={{ backgroundColor: 'var(--color-zinc-50)', borderColor: 'var(--color-zinc-200)' }}>
+      <footer className="py-12 bg-zinc-50 border-t border-zinc-200 mt-auto">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-zinc-600" style={{ color: 'var(--color-zinc-600)' }}>© 2026 freitagskind. Made with care.</p>
+            <p className="text-zinc-600">© 2026 freitagskind. Made with care.</p>
             <div className="flex items-center gap-6">
-              <a href="/imprint" className="text-sm text-zinc-600" style={{ textDecoration: 'none', transition: 'color 0.2s cubic-bezier(0.16, 1, 0.3, 1)', color: 'var(--color-zinc-600)' }}>
+              <a href="/imprint" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors no-underline">
                 Imprint
               </a>
             </div>

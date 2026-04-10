@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // Custom CSS - no Tailwind to avoid Turbopack issues
 };
 
 export default nextConfig;
