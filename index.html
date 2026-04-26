@@ -45,298 +45,440 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-          },
+            display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+            sans:    ['"Geist"', 'system-ui', 'sans-serif'],
+          }
         }
       }
     }
   </script>
   <style>
     :root {
-      /* Brand from freitagskind.png: dark teal */
-      --bg:        #FAFAF9;
-      --bg-alt:    #F0F5F4;
-      --border:    #E7E5E4;
-      --text:      #1C1917;
-      --text-2:    #57534E;
-      --text-3:    #A8A29E;
-      --brand:     #144543;
-      --brand-hover: #0F3634;
-      --brand-lt:  #E8F4F3;
-      --brand-md:  #4A9E96;
-      --green:     #0F766E;
-      --green-lt:  #ECFDF5;
+      --bg:          oklch(98.5% 0.008 175);
+      --bg-alt:      oklch(96.5% 0.012 175);
+      --border:      oklch(91% 0.015 175);
+      --text:        oklch(18% 0.015 175);
+      --text-2:      oklch(43% 0.02 175);
+      --text-3:      oklch(68% 0.013 175);
+      --brand:       oklch(32% 0.082 175);
+      --brand-hover: oklch(26% 0.076 175);
+      --brand-lt:    oklch(94% 0.03 175);
+      --brand-mid:   oklch(54% 0.065 175);
+      --dark:        oklch(11% 0.018 175);
+      --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
       background-color: var(--bg);
       color: var(--text);
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-family: 'Geist', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* ---- Tag / eyebrow ---- */
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--brand-lt);
-      color: var(--brand);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(20,69,67,0.15);
+    /* Grain — fixed, pointer-events-none, never on scroll containers */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0.024;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
     }
 
-    /* ---- Buttons ---- */
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--brand);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.875rem;
-      padding: 12px 24px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: 0 1px 3px rgba(20,69,67,0.25), 0 4px 12px rgba(20,69,67,0.15);
-    }
-    .btn-primary:hover {
-      background: var(--brand-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 6px rgba(20,69,67,0.3), 0 8px 20px rgba(20,69,67,0.2);
-    }
+    img, svg { display: block; }
+    h1, h2, h3 { text-wrap: balance; }
 
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #fff;
-      color: var(--text);
-      font-weight: 600;
-      font-size: 0.875rem;
-      padding: 12px 24px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-    .btn-secondary:hover {
-      background: var(--bg-alt);
-      border-color: #C7C3BF;
-      transform: translateY(-1px);
-    }
-
-    /* ---- Nav ---- */
-    .navbar {
-      background: rgba(250,250,249,0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(231,229,228,0.8);
-    }
-
-    .nav-link {
-      color: var(--text-2);
-      font-size: 0.875rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.15s ease;
-      cursor: pointer;
-    }
-    .nav-link:hover { color: var(--text); }
-
-    /* ---- Cards ---- */
-    .card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
-      border-color: #D4D0CC;
-    }
-
-    /* ---- Icon container ---- */
-    .icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      background: var(--brand-lt);
-      border: 1px solid rgba(20,69,67,0.12);
-    }
-
-    /* ---- Phone mockup ---- */
-    .phone {
-      width: 256px;
-      height: 520px;
-      border-radius: 42px;
-      background: #fff;
-      border: 1.5px solid #E7E5E4;
-      box-shadow:
-        0 2px 4px rgba(0,0,0,0.06),
-        0 24px 64px rgba(0,0,0,0.14),
-        0 0 0 6px rgba(255,255,255,0.9);
-      position: relative;
-      overflow: hidden;
-    }
-    .phone-notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 84px;
-      height: 24px;
-      background: #1C1917;
-      border-radius: 0 0 16px 16px;
-      z-index: 20;
-    }
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* ---- Divider ---- */
-    .section-divider {
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ---- Animations ---- */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float2 {
-      0%, 100% { transform: translateY(0) rotate(2deg); }
-      50%       { transform: translateY(-9px) rotate(2deg); }
-    }
-    /* Floating shapes */
-    @keyframes shapeEntry {
-      from { opacity: 0; transform: translateY(-60px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes shapeFloat {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(14px); }
-    }
-
-    .h-anim-1 { animation: fadeUp 0.65s ease both; }
-    .h-anim-2 { animation: fadeUp 0.65s 0.1s ease both; }
-    .h-anim-3 { animation: fadeUp 0.65s 0.2s ease both; }
-    .h-anim-4 { animation: fadeUp 0.65s 0.32s ease both; }
-    .phone-float2 { animation: float2 4.5s 1s ease-in-out infinite; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .h-anim-1, .h-anim-2, .h-anim-3, .h-anim-4 { animation: none; opacity: 1; }
-      .phone-float2 { animation: none; }
-      .shape-inner { animation: none !important; opacity: 0.7 !important; transform: none !important; }
-      .reveal { opacity: 1; transform: none; transition: none; }
-    }
-
-    /* ---- Decorative dots grid ---- */
-    .dot-grid {
-      background-image: radial-gradient(circle, #D6D3D1 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-
-    /* ---- Highlight text ---- */
-    .text-accent { color: var(--brand); }
-
-    /* ---- Pill badge ---- */
-    .app-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--green-lt);
-      color: #0D9488;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(13,148,136,0.22);
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+      border-radius: 4px;
     }
 
     .skip-link {
-      position: absolute;
-      left: -9999px;
-      z-index: 100;
-      padding: 12px 16px;
-      background: var(--brand);
-      color: #fff;
-      font-weight: 600;
-      border-radius: 0 0 8px 0;
-      text-decoration: none;
+      position: absolute; left: -9999px; z-index: 100;
+      padding: 12px 16px; background: var(--brand);
+      color: oklch(97% 0.003 175); font-weight: 600;
+      border-radius: 0 0 8px 0; text-decoration: none;
     }
-    .skip-link:focus {
-      left: 0;
-      top: 0;
-      outline: 2px solid #fff;
-      outline-offset: 2px;
+    .skip-link:focus { left: 0; top: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
-    .lang-switch {
-      display: inline-flex;
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .navbar {
+      background: oklch(98.5% 0.008 175 / 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid oklch(91% 0.015 175 / 0.9);
+      box-shadow: 0 2px 20px oklch(32% 0.082 175 / 0.07), 0 1px 3px oklch(0% 0 0 / 0.04);
+    }
+    .nav-link {
+      color: var(--text-2); font-size: 0.875rem; font-weight: 500;
+      text-decoration: none; transition: color 150ms ease;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link--active { color: var(--brand) !important; }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand); color: oklch(97% 0.003 175);
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-weight: 600; font-size: 0.875rem;
+      padding: 11px 22px; border-radius: 10px; border: none;
+      cursor: pointer; text-decoration: none;
+      transition: background 150ms var(--ease-out), transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+      box-shadow: 0 1px 3px oklch(32% 0.082 175 / 0.28), 0 4px 12px oklch(32% 0.082 175 / 0.16);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover {
+        background: var(--brand-hover); transform: translateY(-1px);
+        box-shadow: 0 2px 6px oklch(32% 0.082 175 / 0.32), 0 8px 20px oklch(32% 0.082 175 / 0.22);
+      }
+    }
+    .btn-primary:active { transform: scale(0.97); transition-duration: 100ms; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text-2);
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-weight: 600; font-size: 0.875rem;
+      padding: 11px 22px; border-radius: 10px;
+      border: 1px solid var(--border); cursor: pointer; text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: color 150ms ease, border-color 150ms ease, transform 160ms var(--ease-out);
+      box-shadow: 0 1px 2px oklch(0% 0 0 / 0.04);
+    }
+    .btn-ghost::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--brand-lt); transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: inherit; z-index: -1;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-ghost:hover { color: var(--brand); border-color: oklch(32% 0.082 175 / 0.3); transform: translateY(-1px); }
+      .btn-ghost:hover::before { transform: scaleX(1); }
+    }
+    .btn-ghost:active { transform: scale(0.97); transition-duration: 100ms; }
+
+    /* Ghost button for dark backgrounds */
+    .btn-outline-light {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: oklch(88% 0.01 175);
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-weight: 600; font-size: 0.875rem;
+      padding: 11px 22px; border-radius: 10px;
+      border: 1px solid oklch(100% 0 0 / 0.18); cursor: pointer; text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: color 150ms ease, border-color 150ms ease, transform 160ms var(--ease-out);
+    }
+    .btn-outline-light::before {
+      content: ''; position: absolute; inset: 0;
+      background: oklch(100% 0 0 / 0.07); transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: inherit; z-index: -1;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-outline-light:hover { color: oklch(100% 0 0); border-color: oklch(100% 0 0 / 0.35); transform: translateY(-1px); }
+      .btn-outline-light:hover::before { transform: scaleX(1); }
+    }
+    .btn-outline-light:active { transform: scale(0.97); transition-duration: 100ms; }
+
+    /* ============================================================
+       TAG
+    ============================================================ */
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--brand-lt); color: var(--brand);
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 999px;
+      border: 1px solid oklch(32% 0.082 175 / 0.14);
+    }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-18px); }
+    }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes dotBeat {
+      0%, 100% { transform: scale(1);   opacity: 1; }
+      50%       { transform: scale(1.6); opacity: 0.5; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.65; }
+      50%       { opacity: 1; }
+    }
+
+    .h-anim-1 { animation: fadeUp 0.65s var(--ease-out) both; }
+    .h-anim-2 { animation: fadeUp 0.65s 0.09s var(--ease-out) both; }
+    .h-anim-3 { animation: fadeUp 0.65s 0.18s var(--ease-out) both; }
+    .h-anim-4 { animation: fadeUp 0.65s 0.27s var(--ease-out) both; }
+    .h-anim-5 { animation: fadeUp 0.65s 0.36s var(--ease-out) both; }
+
+    .tag svg         { animation: dotBeat 2.8s ease-in-out infinite; flex-shrink: 0; }
+    .orb-float       { animation: floatOrb 7s ease-in-out infinite; }
+    .spin-slow       { animation: spinSlow 24s linear infinite; transform-origin: center; }
+    .pulse-glow      { animation: pulseGlow 3s ease-in-out infinite; }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Stagger feat-rows inside a revealed container */
+    .reveal .feat-row {
+      transform: translateY(10px);
+      transition: transform 0.5s var(--ease-out);
+    }
+    .reveal.visible .feat-row                  { transform: translateY(0); }
+    .reveal.visible .feat-row:nth-child(1)     { transition-delay: 0.08s; }
+    .reveal.visible .feat-row:nth-child(2)     { transition-delay: 0.18s; }
+    .reveal.visible .feat-row:nth-child(3)     { transition-delay: 0.28s; }
+
+    /* Stagger feat-checks */
+    .reveal .feat-check {
+      transform: translateY(8px);
+      transition: transform 0.45s var(--ease-out);
+    }
+    .reveal.visible .feat-check                { transform: translateY(0); }
+    .reveal.visible .feat-check:nth-child(1)   { transition-delay: 0.08s; }
+    .reveal.visible .feat-check:nth-child(2)   { transition-delay: 0.16s; }
+    .reveal.visible .feat-check:nth-child(3)   { transition-delay: 0.24s; }
+    .reveal.visible .feat-check:nth-child(4)   { transition-delay: 0.32s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tag svg, .orb-float, .spin-slow, .pulse-glow,
+      .h-anim-1, .h-anim-2, .h-anim-3, .h-anim-4, .h-anim-5 {
+        animation: none; opacity: 1;
+      }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal .feat-row, .reveal .feat-check { transform: none !important; }
+    }
+
+    /* ============================================================
+       HERO ORB
+    ============================================================ */
+    .hero-orb-wrap {
+      position: absolute;
+      right: -6%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(52vw, 620px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 767px) {
+      .hero-orb-wrap {
+        right: -25%;
+        top: auto;
+        bottom: 0;
+        transform: none;
+        width: 100vw;
+        opacity: 0.18;
+      }
+    }
+
+    /* ============================================================
+       FEATURE ROWS — "What We Do"
+    ============================================================ */
+    .feat-row {
+      display: grid;
+      grid-template-columns: 48px 1fr 36px;
+      gap: 18px;
+      padding: 26px 0;
       align-items: center;
-      gap: 2px;
-      padding: 3px;
-      border-radius: 10px;
+      cursor: default;
+    }
+    .feat-row + .feat-row { border-top: 1px solid var(--border); }
+    .feat-rows-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .feat-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--brand);
+      padding-top: 2px;
+    }
+    .feat-title {
+      transition: color 200ms ease;
+    }
+    .feat-arrow {
+      width: 32px; height: 32px; border-radius: 50%;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--text-3);
+      transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out), transform 220ms var(--ease-out), color 200ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .feat-row:hover .feat-arrow {
+        background: var(--brand-lt);
+        border-color: oklch(32% 0.082 175 / 0.2);
+        color: var(--brand);
+        transform: translate(2px, -2px);
+      }
+      .feat-row:hover .feat-title { color: var(--brand); }
+    }
+
+    /* ============================================================
+       PENDULA SECTION
+    ============================================================ */
+    .section-dark { background: var(--dark); }
+
+    .ghost-num {
+      position: absolute;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800; line-height: 0.9;
+      color: oklch(100% 0 0 / 0.03);
+      pointer-events: none; user-select: none;
+    }
+
+    .feat-check {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 0;
+    }
+    .feat-check + .feat-check {
+      border-top: 1px solid oklch(100% 0 0 / 0.07);
+    }
+
+    /* ============================================================
+       APPROACH STEPS
+    ============================================================ */
+    .step {
+      padding: 36px 0;
+    }
+    .step + .step { border-top: 1px solid var(--border); }
+
+    .step-big-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 800; line-height: 1; letter-spacing: -0.04em;
+      color: oklch(32% 0.082 175 / 0.09);
+      transition: color 280ms ease;
+      flex-shrink: 0;
+    }
+    .step-label {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 0.5rem;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .step:hover .step-big-num { color: oklch(32% 0.082 175 / 0.2); }
+    }
+
+    /* ============================================================
+       ABOUT — VALUE TILES
+    ============================================================ */
+    .val-tile {
+      padding: 1.5rem;
+      background: var(--bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .val-tile:hover {
+        border-color: oklch(32% 0.082 175 / 0.22);
+        box-shadow: 0 4px 16px oklch(32% 0.082 175 / 0.07);
+      }
+    }
+    .val-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800; font-size: 1.9rem;
+      color: var(--brand); letter-spacing: -0.03em;
+      line-height: 1; margin-bottom: 6px;
+    }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    .section-brand { background: var(--brand); }
+
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      color: oklch(97% 0.003 175);
+      text-decoration: none;
+      border-bottom: 2px solid oklch(100% 0 0 / 0.28);
+      padding-bottom: 3px;
+      transition: border-color 220ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .contact-email:hover { border-color: oklch(100% 0 0 / 0.85); }
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer-link {
+      font-size: 0.825rem; color: var(--text-3);
+      text-decoration: none; transition: color 150ms ease;
+    }
+    .footer-link:hover { color: var(--text-2); }
+
+    /* ============================================================
+       LANG SWITCH
+    ============================================================ */
+    .lang-switch {
+      display: inline-flex; align-items: center; gap: 2px;
+      padding: 3px; border-radius: 10px;
+      border: 1px solid var(--border);
+      background: oklch(100% 0 0 / 0.8);
     }
     .lang-switch__btn {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      color: var(--text-2);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
+      padding: 5px 9px; border-radius: 7px; border: none;
+      background: transparent; color: var(--text-2); cursor: pointer;
+      transition: background 130ms ease, color 130ms ease;
     }
     .lang-switch__btn:hover { color: var(--text); }
     .lang-switch__btn--active,
-    .lang-switch__btn[aria-pressed="true"] {
-      background: var(--brand-lt);
-      color: var(--brand);
-    }
+    .lang-switch__btn[aria-pressed="true"] { background: var(--brand-lt); color: var(--brand); }
   </style>
 </head>
 <body>
@@ -346,30 +488,32 @@
 <!-- ============================================================
      NAVBAR
 ============================================================ -->
-<header class="fixed top-0 left-0 right-0 z-50">
-  <nav class="navbar px-6 py-4 flex items-center justify-between mx-auto w-full" style="max-width:100%;" aria-label="Primary">
-    <div class="max-w-6xl w-full mx-auto flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5 cursor-pointer">
-        <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="180" height="48" class="h-8 sm:h-9 w-auto max-h-10 object-contain object-left" />
-        <span class="font-semibold text-sm text-stone-800">freitagskind apps</span>
-      </a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#apps"     class="nav-link" data-i18n="nav.apps">Apps</a>
-        <a href="#about"    class="nav-link" data-i18n="nav.about">About</a>
-        <a href="#contact"  class="nav-link" data-i18n="nav.contact">Contact</a>
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4">
+  <nav class="navbar flex items-center gap-4 px-5 py-3 rounded-full w-full"
+       style="max-width:720px;" aria-label="Primary">
+
+    <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
+      <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps"
+           width="148" height="40" class="h-7 w-auto object-contain object-left" />
+    </a>
+
+    <div class="hidden md:flex items-center gap-6 flex-1 justify-center">
+      <a href="#apps"    class="nav-link" data-i18n="nav.apps">Apps</a>
+      <a href="#about"   class="nav-link" data-i18n="nav.about">About</a>
+      <a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-2 ml-auto">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-switch__btn" data-lang-set="de" aria-pressed="false">DE</button>
+        <button type="button" class="lang-switch__btn" data-lang-set="en" aria-pressed="false">EN</button>
       </div>
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" class="lang-switch__btn" data-lang-set="de" aria-pressed="false">DE</button>
-          <button type="button" class="lang-switch__btn" data-lang-set="en" aria-pressed="false">EN</button>
-        </div>
-        <a href="#apps" class="btn-primary" style="padding: 9px 18px; font-size: 0.8rem;" data-i18n="nav.explore">
+      <a href="#apps" class="btn-primary hidden sm:inline-flex"
+         style="padding:8px 16px;font-size:0.8rem;" data-i18n="nav.explore">
         Explore Apps
       </a>
-      </div>
     </div>
   </nav>
-  <div class="section-divider"></div>
 </header>
 
 <main id="main">
@@ -377,212 +521,316 @@
 <!-- ============================================================
      HERO
 ============================================================ -->
-<section class="relative overflow-hidden pt-28 pb-24 md:pt-40 md:pb-36" aria-labelledby="hero-heading">
-  <!-- Dot grid background -->
-  <div class="dot-grid absolute inset-0 opacity-35 pointer-events-none"></div>
-  <!-- Soft color wash -->
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(20,69,67,0.09) 0%,transparent 70%);pointer-events:none;"></div>
+<section class="relative overflow-hidden"
+         style="min-height:100dvh;display:flex;align-items:center;padding:clamp(7rem,12vw,10rem) 0 clamp(5rem,8vw,8rem);"
+         aria-labelledby="hero-heading">
 
-  <!-- ---- Floating elegant shapes (brand teal family) ---- -->
-  <!-- Shape 1: Large brand pill, upper-left -->
-  <div style="position:absolute;top:18%;left:-8%;width:560px;height:130px;transform:rotate(12deg);pointer-events:none;z-index:0;" aria-hidden="true">
-    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(20,69,67,0.12),transparent);border:1.5px solid rgba(20,69,67,0.14);opacity:0;animation:shapeEntry 2s 0.3s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 12s 2.3s ease-in-out infinite;"></div>
-  </div>
+  <!-- Ambient gradient -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 58% 65% at 72% 48%,oklch(32% 0.082 175 / 0.07) 0%,transparent 65%);pointer-events:none;" aria-hidden="true"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 40% 50% at 15% 80%,oklch(54% 0.065 175 / 0.04) 0%,transparent 55%);pointer-events:none;" aria-hidden="true"></div>
 
-  <!-- Shape 2: Soft seafoam, lower-right -->
-  <div style="position:absolute;top:62%;right:-5%;width:480px;height:112px;transform:rotate(-15deg);pointer-events:none;z-index:0;" aria-hidden="true">
-    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(74,158,150,0.14),transparent);border:1.5px solid rgba(74,158,150,0.18);opacity:0;animation:shapeEntry 2s 0.5s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 10s 2.5s ease-in-out infinite;"></div>
-  </div>
-
-  <!-- Shape 3: Deep teal pill, lower-left -->
-  <div style="position:absolute;bottom:8%;left:6%;width:280px;height:72px;transform:rotate(-8deg);pointer-events:none;z-index:0;" aria-hidden="true">
-    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(15,54,52,0.1),transparent);border:1.5px solid rgba(20,69,67,0.12);opacity:0;animation:shapeEntry 2s 0.4s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 14s 2.4s ease-in-out infinite;"></div>
-  </div>
-
-  <!-- Shape 4: Mint accent, upper-right -->
-  <div style="position:absolute;top:10%;right:16%;width:190px;height:54px;transform:rotate(20deg);pointer-events:none;z-index:0;" aria-hidden="true">
-    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(45,107,102,0.12),transparent);border:1.5px solid rgba(45,107,102,0.16);opacity:0;animation:shapeEntry 2s 0.6s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 9s 2.6s ease-in-out infinite;"></div>
-  </div>
-
-  <!-- Shape 5: Bright teal pill, upper-center -->
-  <div style="position:absolute;top:6%;left:26%;width:145px;height:42px;transform:rotate(-25deg);pointer-events:none;z-index:0;" aria-hidden="true">
-    <div class="shape-inner" style="width:100%;height:100%;border-radius:9999px;background:linear-gradient(to right,rgba(13,148,136,0.13),transparent);border:1.5px solid rgba(13,148,136,0.18);opacity:0;animation:shapeEntry 2s 0.7s cubic-bezier(0.23,0.86,0.39,0.96) forwards, shapeFloat 11s 2.7s ease-in-out infinite;"></div>
-  </div>
-
-  <!-- Centered text content -->
-  <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
-    <span class="tag h-anim-1 mb-6 inline-flex">
-      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
-      <span data-i18n="tag.studio">Independent App Studio</span>
-    </span>
-    <h1 id="hero-heading" class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight mt-5 h-anim-2">
-      <span data-i18n="hero.line1">Build better days,</span><br/>
-      <span class="text-accent" data-i18n="hero.line2">one app at a time.</span>
-    </h1>
-    <p class="mt-6 text-stone-500 text-lg leading-relaxed max-w-xl mx-auto h-anim-3" data-i18n="hero.sub">
-      Thoughtful mobile tools that make everyday life simpler, calmer, and more fun.
-    </p>
-    <div class="mt-9 flex flex-wrap gap-3 justify-center h-anim-4">
-      <a href="#apps"    class="btn-primary" data-i18n="hero.cta1">Explore Our Apps</a>
-      <a href="#contact" class="btn-secondary" data-i18n="hero.cta2">Get in Touch</a>
+  <!-- Abstract ring composition -->
+  <div class="hero-orb-wrap" aria-hidden="true">
+    <div class="orb-float">
+      <svg viewBox="0 0 580 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hg1" x1="10%" y1="0%" x2="90%" y2="100%">
+            <stop offset="0%"   stop-color="oklch(32% 0.082 175)"  stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="oklch(62% 0.075 175)"  stop-opacity="0.35"/>
+          </linearGradient>
+          <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="oklch(54% 0.065 175)" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="oklch(32% 0.082 175)" stop-opacity="0.08"/>
+          </linearGradient>
+        </defs>
+        <!-- Ghost halos -->
+        <circle cx="290" cy="290" r="270" stroke="oklch(32% 0.082 175)" stroke-opacity="0.06" stroke-width="1"/>
+        <circle cx="290" cy="290" r="220" stroke="oklch(32% 0.082 175)" stroke-opacity="0.09" stroke-width="1"/>
+        <!-- Rotating dashed ring -->
+        <g class="spin-slow">
+          <circle cx="290" cy="290" r="200" stroke="oklch(54% 0.065 175)" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="7 15"/>
+        </g>
+        <!-- Main gradient arc (~75% visible) -->
+        <circle cx="290" cy="290" r="162"
+                stroke="url(#hg1)" stroke-width="2.5" stroke-linecap="round"
+                stroke-dasharray="1018" stroke-dashoffset="254"/>
+        <!-- Inner ring -->
+        <circle cx="290" cy="290" r="92"  stroke="url(#hg2)" stroke-width="1.5"/>
+        <!-- Inner fill disc -->
+        <circle cx="290" cy="290" r="92"  fill="oklch(32% 0.082 175)" fill-opacity="0.04"/>
+        <!-- Crosshair -->
+        <line x1="283" y1="290" x2="297" y2="290" stroke="oklch(32% 0.082 175)" stroke-opacity="0.28" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="290" y1="283" x2="290" y2="297" stroke="oklch(32% 0.082 175)" stroke-opacity="0.28" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Accent dot at ~55° -->
+        <circle cx="378" cy="152" r="7" fill="oklch(62% 0.075 175)" class="pulse-glow"/>
+        <!-- Satellite dots -->
+        <circle cx="418" cy="318" r="3.5" fill="oklch(54% 0.065 175)" fill-opacity="0.45"/>
+        <circle cx="178" cy="402" r="2.5" fill="oklch(54% 0.065 175)" fill-opacity="0.3"/>
+        <circle cx="142" cy="210" r="2"   fill="oklch(32% 0.082 175)" fill-opacity="0.25"/>
+        <!-- Sparse dot grid -->
+        <circle cx="72"  cy="72"  r="1.5" fill="oklch(32% 0.082 175)" fill-opacity="0.14"/>
+        <circle cx="122" cy="72"  r="1.5" fill="oklch(32% 0.082 175)" fill-opacity="0.09"/>
+        <circle cx="72"  cy="122" r="1.5" fill="oklch(32% 0.082 175)" fill-opacity="0.09"/>
+        <circle cx="508" cy="438" r="1.5" fill="oklch(32% 0.082 175)" fill-opacity="0.11"/>
+        <circle cx="458" cy="488" r="1.5" fill="oklch(32% 0.082 175)" fill-opacity="0.07"/>
+        <circle cx="508" cy="488" r="1.5" fill="oklch(32% 0.082 175)" fill-opacity="0.09"/>
+      </svg>
     </div>
   </div>
 
+  <div class="max-w-6xl mx-auto px-6 w-full" style="position:relative;z-index:1;">
+
+    <!-- Eyebrow -->
+    <div class="h-anim-1 mb-8">
+      <span class="tag">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="currentColor" aria-hidden="true">
+          <circle cx="3.5" cy="3.5" r="3.5"/>
+        </svg>
+        <span data-i18n="tag.studio">Independent App Studio</span>
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 id="hero-heading"
+        class="h-anim-2 font-display"
+        style="font-size:clamp(3rem,7.5vw,6.4rem);font-weight:800;line-height:1.04;letter-spacing:-0.04em;color:var(--text);max-width:13ch;margin-bottom:2.25rem;">
+      <span data-i18n="hero.line1">Build better days,</span><br/>
+      <em style="font-style:normal;color:var(--brand);" data-i18n="hero.line2">one app</em><br/>
+      <span data-i18n="hero.line3">at a time.</span>
+    </h1>
+
+    <!-- Sub-row: body text left, CTAs right -->
+    <div class="h-anim-3 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-end"
+         style="max-width:860px;">
+      <p style="font-size:1.05rem;color:var(--text-2);max-width:44ch;line-height:1.78;"
+         data-i18n="hero.sub">
+        Thoughtful mobile tools that make everyday life simpler, calmer, and more fun.
+      </p>
+      <div class="flex flex-wrap gap-3 lg:pb-px">
+        <a href="#apps"    class="btn-primary" data-i18n="hero.cta1">Explore Our Apps</a>
+        <a href="#contact" class="btn-ghost"   data-i18n="hero.cta2">Get in Touch</a>
+      </div>
+    </div>
+
+    <!-- Metadata strip -->
+    <div class="h-anim-4 flex flex-wrap items-center gap-x-5 gap-y-2 mt-16"
+         style="padding-top:1.75rem;border-top:1px solid var(--border);">
+      <span style="font-size:0.72rem;color:var(--text-3);letter-spacing:0.07em;text-transform:uppercase;">freitagskind apps</span>
+      <span style="width:1px;height:11px;background:var(--border);flex-shrink:0;"></span>
+      <span style="font-size:0.72rem;color:var(--text-3);">Android</span>
+      <span style="width:1px;height:11px;background:var(--border);flex-shrink:0;"></span>
+      <span style="font-size:0.72rem;color:var(--text-3);" data-i18n="hero.meta">Focused. Human-centered. Independent.</span>
+    </div>
+  </div>
 </section>
 
 
 <!-- ============================================================
      WHAT WE DO
 ============================================================ -->
-<div class="section-divider"></div>
-<section style="background:var(--bg-alt);" class="py-24">
+<section style="background:var(--bg-alt);padding:clamp(5rem,9vw,8rem) 0;">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="max-w-2xl reveal">
-      <span class="tag mb-5" data-i18n="what.tag">What We Do</span>
-      <h2 class="text-4xl font-extrabold tracking-tight leading-tight mt-4 mb-5" data-i18n="what.h2">
-        Small apps. Real impact.
-      </h2>
-      <p class="text-stone-500 text-lg leading-relaxed" data-i18n="what.p">
-        We focus on utility-first apps that solve clear problems quickly. No bloated features, no complexity for complexity's sake - just clean, practical experiences people actually use.
-      </p>
-    </div>
+    <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-16 items-start">
 
-    <div class="grid md:grid-cols-3 gap-5 mt-14">
-      <div class="card p-7 reveal" style="transition-delay:0.05s;">
-        <div class="icon-box mb-5">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#144543" class="w-5 h-5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-          </svg>
-        </div>
-        <h3 class="font-bold text-base mb-2" data-i18n="what.c1t">Focused utility</h3>
-        <p class="text-stone-400 text-sm leading-relaxed" data-i18n="what.c1p">Apps that do one thing exceptionally well. No feature creep, no subscription traps.</p>
+      <!-- Left: sticky heading -->
+      <div class="reveal" style="position:sticky;top:7rem;">
+        <span class="tag mb-5 inline-flex" data-i18n="what.tag">What We Do</span>
+        <h2 class="font-display mt-4"
+            style="font-size:clamp(2rem,4vw,3.1rem);font-weight:800;letter-spacing:-0.036em;line-height:1.07;margin-bottom:1.25rem;color:var(--text);"
+            data-i18n="what.h2">
+          Small apps.<br/>Real impact.
+        </h2>
+        <p style="font-size:0.9375rem;color:var(--text-2);line-height:1.78;max-width:36ch;"
+           data-i18n="what.p">
+          We focus on utility-first apps that solve clear problems quickly. No bloated features, no complexity for complexity's sake.
+        </p>
       </div>
-      <div class="card p-7 reveal" style="transition-delay:0.1s;">
-        <div class="icon-box mb-5">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#144543" class="w-5 h-5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
-          </svg>
-        </div>
-        <h3 class="font-bold text-base mb-2" data-i18n="what.c2t">Premium craft</h3>
-        <p class="text-stone-400 text-sm leading-relaxed" data-i18n="what.c2p">Thoughtful UI details and delightful interactions. Every pixel earns its place.</p>
-      </div>
-      <div class="card p-7 reveal" style="transition-delay:0.17s;">
-        <div class="icon-box mb-5">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#144543" class="w-5 h-5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
-          </svg>
-        </div>
-        <h3 class="font-bold text-base mb-2" data-i18n="what.c3t">Built for humans</h3>
-        <p class="text-stone-400 text-sm leading-relaxed" data-i18n="what.c3p">Real problems, real people. Every app starts with a daily frustration worth solving.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
+      <!-- Right: feature rows -->
+      <div class="reveal" style="transition-delay:0.07s;">
+        <div class="feat-rows-wrap">
 
-<!-- ============================================================
-     FEATURED APP: PENDULA
-============================================================ -->
-<div class="section-divider"></div>
-<section id="apps" class="py-28">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="grid lg:grid-cols-2 gap-20 items-center">
-
-      <!-- Phone -->
-      <div class="flex justify-center order-2 lg:order-1 reveal">
-        <div class="phone-float2" style="position:relative;">
-          <div class="phone" style="width:248px;height:505px;">
-            <div class="phone-notch"></div>
-            <div class="phone-screen" style="background:linear-gradient(155deg,#0A1212 0%,#0F1F1E 55%,#0A1212 100%);">
-              <div style="position:absolute;width:210px;height:210px;background:radial-gradient(circle,rgba(20,69,67,0.35) 0%,transparent 65%);top:-55px;left:-55px;border-radius:50%;pointer-events:none;"></div>
-              <div style="position:absolute;width:150px;height:150px;background:radial-gradient(circle,rgba(74,158,150,0.22) 0%,transparent 65%);bottom:50px;right:-25px;border-radius:50%;pointer-events:none;"></div>
-
-              <div style="position:relative;z-index:10;padding:48px 16px 18px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
-                <!-- Widget card -->
-                <div style="width:100%;background:linear-gradient(135deg,rgba(20,69,67,0.22),rgba(74,158,150,0.1));border:1px solid rgba(74,158,150,0.28);border-radius:26px;padding:20px;display:flex;flex-direction:column;align-items:center;text-align:center;">
-                  <!-- Ring -->
-                  <div style="width:116px;height:116px;position:relative;margin-bottom:10px;">
-                    <svg width="116" height="116" style="transform:rotate(-90deg);">
-                      <defs>
-                        <linearGradient id="ig2" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="#144543"/>
-                          <stop offset="100%" stop-color="#4A9E96"/>
-                        </linearGradient>
-                      </defs>
-                      <circle cx="58" cy="58" r="50" stroke="rgba(255,255,255,0.07)" stroke-width="8" fill="none"/>
-                      <circle cx="58" cy="58" r="50" stroke="url(#ig2)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="79"/>
-                    </svg>
-                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-                      <div style="font-weight:800;font-size:2.2rem;line-height:1;color:#7ECBC4;">47</div>
-                      <div style="color:rgba(255,255,255,0.35);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;" data-i18n="phone.days">days</div>
-                    </div>
-                  </div>
-                  <p style="color:#FAF9F7;font-weight:700;font-size:14px;" data-i18n="phone.ev1">Summer Holiday</p>
-                  <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:3px;" data-i18n="phone.d1">July 14, 2026</p>
-                </div>
-                <!-- Small row -->
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;">
-                  <div style="background:rgba(20,69,67,0.2);border:1px solid rgba(74,158,150,0.28);border-radius:18px;padding:11px 10px;text-align:center;">
-                    <div style="font-weight:700;font-size:21px;color:#FAF9F7;line-height:1;">12</div>
-                    <div style="color:rgba(255,255,255,0.3);font-size:10px;margin-top:3px;" data-i18n="phone.lb1">Mom's B-Day</div>
-                  </div>
-                  <div style="background:rgba(13,148,136,0.14);border:1px solid rgba(13,148,136,0.28);border-radius:18px;padding:11px 10px;text-align:center;">
-                    <div style="font-weight:700;font-size:21px;color:#FAF9F7;line-height:1;">89</div>
-                    <div style="color:rgba(255,255,255,0.3);font-size:10px;margin-top:3px;" data-i18n="phone.lb2">Team Trip</div>
-                  </div>
-                </div>
-              </div>
+          <div class="feat-row">
+            <span class="feat-num">01</span>
+            <div>
+              <h3 class="feat-title font-display"
+                  style="font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px;"
+                  data-i18n="what.c1t">Focused utility</h3>
+              <p style="font-size:0.875rem;color:var(--text-2);line-height:1.7;"
+                 data-i18n="what.c1p">Apps that do one thing exceptionally well. No feature creep, no subscription traps.</p>
+            </div>
+            <div class="feat-arrow" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 10 10 2M5 2h5v5"/>
+              </svg>
             </div>
           </div>
-          <div style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:150px;height:26px;background:rgba(20,69,67,0.28);filter:blur(18px);border-radius:50%;pointer-events:none;"></div>
+
+          <div class="feat-row">
+            <span class="feat-num">02</span>
+            <div>
+              <h3 class="feat-title font-display"
+                  style="font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px;"
+                  data-i18n="what.c2t">Premium craft</h3>
+              <p style="font-size:0.875rem;color:var(--text-2);line-height:1.7;"
+                 data-i18n="what.c2p">Thoughtful UI details and delightful interactions. Every pixel earns its place.</p>
+            </div>
+            <div class="feat-arrow" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 10 10 2M5 2h5v5"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="feat-row">
+            <span class="feat-num">03</span>
+            <div>
+              <h3 class="feat-title font-display"
+                  style="font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px;"
+                  data-i18n="what.c3t">Built for humans</h3>
+              <p style="font-size:0.875rem;color:var(--text-2);line-height:1.7;"
+                 data-i18n="what.c3p">Real problems, real people. Every app starts with a daily frustration worth solving.</p>
+            </div>
+            <div class="feat-arrow" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 10 10 2M5 2h5v5"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PENDULA — dark feature section, no screenshots
+============================================================ -->
+<section id="apps" class="section-dark relative overflow-hidden"
+         style="padding:clamp(5rem,9vw,8.5rem) 0;"
+         aria-labelledby="pendula-heading">
+
+  <!-- Ghost number backdrop -->
+  <div class="ghost-num"
+       style="font-size:clamp(10rem,28vw,26rem);right:-1%;bottom:-6%;"
+       aria-hidden="true">47</div>
+
+  <!-- Ambient glow -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 52% 58% at 72% 50%,oklch(32% 0.082 175 / 0.2) 0%,transparent 60%);pointer-events:none;" aria-hidden="true"></div>
+
+  <div class="max-w-6xl mx-auto px-6 relative" style="z-index:1;">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-16 lg:gap-20 items-center">
+
+      <!-- Left: editorial content -->
+      <div class="reveal">
+        <!-- Badges -->
+        <div class="flex items-center gap-3 mb-8">
+          <span style="display:inline-flex;align-items:center;gap:6px;background:oklch(100% 0 0 / 0.07);color:oklch(68% 0.018 175);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;border:1px solid oklch(100% 0 0 / 0.1);"
+                data-i18n="feat.tag">Featured App</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:oklch(32% 0.1 145 / 0.35);color:oklch(72% 0.12 145);font-size:0.68rem;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid oklch(60% 0.1 145 / 0.28);"
+                data-i18n="feat.badge">Android</span>
+        </div>
+
+        <!-- App name -->
+        <h2 id="pendula-heading" class="font-display"
+            style="font-size:clamp(3.8rem,8.5vw,7.5rem);font-weight:800;letter-spacing:-0.05em;line-height:0.95;color:oklch(96% 0.006 175);margin-bottom:0.6rem;">
+          Pendula
+        </h2>
+
+        <!-- Formerly note -->
+        <p style="font-size:0.75rem;color:oklch(48% 0.014 175);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.75rem;font-weight:600;"
+           data-i18n="feat.formerly">formerly Daymark</p>
+
+        <!-- Description -->
+        <p style="font-size:1.05rem;color:oklch(68% 0.015 175);line-height:1.82;max-width:48ch;margin-bottom:2.5rem;"
+           data-i18n="feat.desc">
+          A countdown widget app designed to keep your important moments visible and motivating. From birthdays and trips to personal goals — stay connected to what matters.
+        </p>
+
+        <!-- Feature list -->
+        <div class="reveal" style="margin-bottom:2.5rem;">
+          <div class="feat-check">
+            <div style="width:20px;height:20px;border-radius:50%;background:oklch(32% 0.082 175 / 0.32);border:1px solid oklch(54% 0.065 175 / 0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 16 16" fill="oklch(62% 0.075 175)" width="9" height="9">
+                <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <span style="font-size:0.9rem;color:oklch(70% 0.014 175);" data-i18n="feat.li1">Beautiful widgets with circular progress rings</span>
+          </div>
+          <div class="feat-check">
+            <div style="width:20px;height:20px;border-radius:50%;background:oklch(32% 0.082 175 / 0.32);border:1px solid oklch(54% 0.065 175 / 0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 16 16" fill="oklch(62% 0.075 175)" width="9" height="9">
+                <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <span style="font-size:0.9rem;color:oklch(70% 0.014 175);" data-i18n="feat.li2">Category color-coding for instant visual hierarchy</span>
+          </div>
+          <div class="feat-check">
+            <div style="width:20px;height:20px;border-radius:50%;background:oklch(32% 0.082 175 / 0.32);border:1px solid oklch(54% 0.065 175 / 0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 16 16" fill="oklch(62% 0.075 175)" width="9" height="9">
+                <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <span style="font-size:0.9rem;color:oklch(70% 0.014 175);" data-i18n="feat.li3">Premium dark aesthetic with gradient accents</span>
+          </div>
+          <div class="feat-check">
+            <div style="width:20px;height:20px;border-radius:50%;background:oklch(32% 0.082 175 / 0.32);border:1px solid oklch(54% 0.065 175 / 0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 16 16" fill="oklch(62% 0.075 175)" width="9" height="9">
+                <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <span style="font-size:0.9rem;color:oklch(70% 0.014 175);" data-i18n="feat.li4">Free to download on Android</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="#contact" class="btn-primary" data-i18n="feat.cta">Learn More About Pendula</a>
+          <a href="#contact" class="btn-outline-light" data-i18n="hero.cta2">Get in Touch</a>
         </div>
       </div>
 
-      <!-- Text -->
-      <div class="order-1 lg:order-2 reveal">
-        <span class="tag mb-5" data-i18n="feat.tag">Featured App</span>
-        <div class="flex items-center gap-3 mt-4 mb-2">
-          <h2 class="text-5xl font-extrabold tracking-tight">Pendula</h2>
-          <span class="app-badge" data-i18n="feat.badge">Android</span>
-        </div>
-        <p class="text-stone-400 text-sm italic mb-7" data-i18n="feat.formerly">formerly Daymark</p>
-        <p class="text-stone-500 text-lg leading-relaxed mb-8" data-i18n="feat.desc">
-          A countdown widget app designed to keep your important moments visible and motivating. From birthdays and trips to personal goals, Pendula helps you stay connected to what matters.
-        </p>
-        <!-- Feature list -->
-        <ul class="space-y-3 mb-10" role="list">
-          <li class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <span class="text-stone-600 text-sm" data-i18n="feat.li1">Beautiful widgets with circular progress rings</span>
-          </li>
-          <li class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <span class="text-stone-600 text-sm" data-i18n="feat.li2">Category color-coding for instant visual hierarchy</span>
-          </li>
-          <li class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <span class="text-stone-600 text-sm" data-i18n="feat.li3">Premium dark aesthetic with gradient accents</span>
-          </li>
-          <li class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#144543" class="w-5 h-5 flex-shrink-0" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <span class="text-stone-600 text-sm" data-i18n="feat.li4">Free to download on Android</span>
-          </li>
-        </ul>
-        <!-- When the public Play Store listing URL is finalized, replace #contact with the store link and add rel="noopener noreferrer". -->
-        <a href="#contact" class="btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18h3" />
+      <!-- Right: abstract countdown ring — desktop only -->
+      <div class="hidden lg:block reveal" style="transition-delay:0.1s;" aria-hidden="true">
+        <div class="orb-float" style="width:320px;height:320px;">
+          <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pr1" x1="10%" y1="0%" x2="90%" y2="100%">
+                <stop offset="0%"   stop-color="white"              stop-opacity="0.82"/>
+                <stop offset="100%" stop-color="oklch(62% 0.075 175)" stop-opacity="0.38"/>
+              </linearGradient>
+            </defs>
+            <!-- Ghost halos -->
+            <circle cx="160" cy="160" r="148" stroke="white" stroke-opacity="0.05" stroke-width="1"/>
+            <circle cx="160" cy="160" r="122" stroke="white" stroke-opacity="0.07" stroke-width="1"/>
+            <!-- Rotating dashed ring -->
+            <g class="spin-slow">
+              <circle cx="160" cy="160" r="138" stroke="white" stroke-opacity="0.11" stroke-width="1" stroke-dasharray="6 13"/>
+            </g>
+            <!-- Main arc (~80% visible) -->
+            <circle cx="160" cy="160" r="98"
+                    stroke="url(#pr1)" stroke-width="3" stroke-linecap="round"
+                    stroke-dasharray="616" stroke-dashoffset="123"/>
+            <!-- Inner fill disc -->
+            <circle cx="160" cy="160" r="54" fill="white" fill-opacity="0.04"/>
+            <circle cx="160" cy="160" r="54" stroke="white" stroke-opacity="0.1" stroke-width="1.5"/>
+            <!-- Center count -->
+            <text x="160" y="172" text-anchor="middle"
+                  font-family="'Bricolage Grotesque', sans-serif"
+                  font-size="36" font-weight="800"
+                  fill="white" fill-opacity="0.88" letter-spacing="-1.5">47</text>
+            <text x="160" y="190" text-anchor="middle"
+                  font-family="'Geist', sans-serif"
+                  font-size="8.5" font-weight="500"
+                  fill="white" fill-opacity="0.3" letter-spacing="2.8">DAYS</text>
+            <!-- Accent dot -->
+            <circle cx="233" cy="82" r="5.5" fill="oklch(62% 0.075 175)" class="pulse-glow"/>
           </svg>
-          <span data-i18n="feat.cta">Learn More About Pendula</span>
-        </a>
+        </div>
       </div>
 
     </div>
@@ -591,30 +839,58 @@
 
 
 <!-- ============================================================
-     HOW WE BUILD
+     APPROACH
 ============================================================ -->
-<div class="section-divider"></div>
-<section id="approach" style="background:var(--bg-alt);" class="py-24">
+<section id="approach" style="padding:clamp(5rem,9vw,8rem) 0;">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center mb-16 reveal">
-      <span class="tag mb-5" data-i18n="approach.tag">Our Approach</span>
-      <h2 class="text-4xl font-extrabold tracking-tight mt-4" data-i18n="approach.h2">How we build</h2>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card p-8 reveal" style="transition-delay:0.05s;">
-        <div class="text-5xl font-extrabold mb-6" style="color:rgba(20,69,67,0.12);letter-spacing:-2px;">01</div>
-        <h3 class="font-bold text-lg mb-3" data-i18n="ap1.t">Problem First</h3>
-        <p class="text-stone-400 text-sm leading-relaxed" data-i18n="ap1.p">We start with real daily frustrations, not trends. Every app we build exists because someone needed it.</p>
+    <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-16 items-start">
+
+      <!-- Left: sticky heading -->
+      <div class="reveal" style="position:sticky;top:7rem;">
+        <span class="tag mb-5 inline-flex" data-i18n="approach.tag">Our Approach</span>
+        <h2 class="font-display mt-4"
+            style="font-size:clamp(2rem,4vw,3.1rem);font-weight:800;letter-spacing:-0.036em;line-height:1.07;color:var(--text);"
+            data-i18n="approach.h2">
+          How we<br/>build.
+        </h2>
       </div>
-      <div class="card p-8 reveal" style="transition-delay:0.12s;">
-        <div class="text-5xl font-extrabold mb-6" style="color:rgba(20,69,67,0.12);letter-spacing:-2px;">02</div>
-        <h3 class="font-bold text-lg mb-3" data-i18n="ap2.t">Simple by Design</h3>
-        <p class="text-stone-400 text-sm leading-relaxed" data-i18n="ap2.p">We remove friction until the app feels obvious. The best UX is the one you don't notice.</p>
-      </div>
-      <div class="card p-8 reveal" style="transition-delay:0.2s;">
-        <div class="text-5xl font-extrabold mb-6" style="color:rgba(20,69,67,0.12);letter-spacing:-2px;">03</div>
-        <h3 class="font-bold text-lg mb-3" data-i18n="ap3.t">Built to Last</h3>
-        <p class="text-stone-400 text-sm leading-relaxed" data-i18n="ap3.p">Reliable architecture, clean UX, and continuous improvement. We ship things we're proud of.</p>
+
+      <!-- Right: steps -->
+      <div style="border-top:1px solid var(--border);">
+
+        <div class="step reveal" style="transition-delay:0.04s;">
+          <div class="grid grid-cols-[auto_1fr] gap-8 items-start">
+            <div class="step-big-num">01</div>
+            <div>
+              <p class="step-label" data-i18n="ap1.t">Problem First</p>
+              <p style="font-size:0.9375rem;color:var(--text-2);line-height:1.78;max-width:52ch;"
+                 data-i18n="ap1.p">We start with real daily frustrations, not trends. Every app we build exists because someone needed it.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step reveal" style="transition-delay:0.10s;">
+          <div class="grid grid-cols-[auto_1fr] gap-8 items-start">
+            <div class="step-big-num">02</div>
+            <div>
+              <p class="step-label" data-i18n="ap2.t">Simple by Design</p>
+              <p style="font-size:0.9375rem;color:var(--text-2);line-height:1.78;max-width:52ch;"
+                 data-i18n="ap2.p">We remove friction until the app feels obvious. The best UX is the one you don't notice.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step reveal" style="transition-delay:0.16s;border-bottom:1px solid var(--border);">
+          <div class="grid grid-cols-[auto_1fr] gap-8 items-start">
+            <div class="step-big-num">03</div>
+            <div>
+              <p class="step-label" data-i18n="ap3.t">Built to Last</p>
+              <p style="font-size:0.9375rem;color:var(--text-2);line-height:1.78;max-width:52ch;"
+                 data-i18n="ap3.p">Reliable architecture, clean UX, and continuous improvement. We ship things we're proud of.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -624,89 +900,153 @@
 <!-- ============================================================
      ABOUT
 ============================================================ -->
-<div class="section-divider"></div>
-<section id="about" class="py-24" aria-labelledby="about-heading">
-  <div class="max-w-3xl mx-auto px-6 text-center reveal">
-    <span class="tag mb-5" data-i18n="about.tag">About</span>
-    <h2 id="about-heading" class="text-4xl font-extrabold tracking-tight leading-tight mt-4 mb-7">
-      <span data-i18n="about.h2a">Independent. Practical.</span><br/>
-      <span class="text-accent" data-i18n="about.h2b">Human-centered.</span>
-    </h2>
-    <p class="text-stone-500 text-lg leading-relaxed" data-i18n="about.p">
-      freitagskind apps is an independent app studio focused on meaningful digital products. Our goal is to create tools people open every day because they are genuinely useful - not because dark patterns force them to.
-    </p>
+<section id="about" style="background:var(--bg-alt);padding:clamp(5rem,9vw,7.5rem) 0;"
+         aria-labelledby="about-heading">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
+
+      <!-- Left: editorial text -->
+      <div class="reveal">
+        <span class="tag mb-6 inline-flex" data-i18n="about.tag">About</span>
+        <h2 id="about-heading" class="font-display mt-4"
+            style="font-size:clamp(2.2rem,4.8vw,3.8rem);font-weight:800;letter-spacing:-0.04em;line-height:1.05;margin-bottom:1.75rem;color:var(--text);">
+          <span data-i18n="about.h2a">Independent.</span><br/>
+          <span style="color:var(--brand);" data-i18n="about.h2b">Human-centered.</span>
+        </h2>
+        <p style="font-size:1.05rem;color:var(--text-2);line-height:1.85;max-width:52ch;"
+           data-i18n="about.p">
+          freitagskind apps is an independent app studio focused on meaningful digital products. Our goal is to create tools people open every day because they are genuinely useful — not because dark patterns force them to.
+        </p>
+      </div>
+
+      <!-- Right: value tiles -->
+      <div class="reveal grid grid-cols-2 gap-4" style="transition-delay:0.08s;">
+        <div class="val-tile">
+          <p class="val-num">1</p>
+          <p style="font-size:0.8rem;color:var(--text-2);line-height:1.5;">App in the wild</p>
+        </div>
+        <div class="val-tile">
+          <p class="val-num">100%</p>
+          <p style="font-size:0.8rem;color:var(--text-2);line-height:1.5;">Independent &amp; self-funded</p>
+        </div>
+        <div class="val-tile">
+          <p class="val-num">0</p>
+          <p style="font-size:0.8rem;color:var(--text-2);line-height:1.5;">Dark patterns. Ever.</p>
+        </div>
+        <div class="val-tile">
+          <p class="val-num">Free</p>
+          <p style="font-size:0.8rem;color:var(--text-2);line-height:1.5;">To download, always</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 
 <!-- ============================================================
-     CONTACT CTA
+     CONTACT
 ============================================================ -->
-<div class="section-divider"></div>
-<section id="contact" style="background:var(--bg-alt);" class="py-24">
-  <div class="max-w-3xl mx-auto px-6 text-center reveal">
-    <h2 class="text-4xl font-extrabold tracking-tight leading-tight mb-5">
-      <span data-i18n="contact.h2a">Let's build something</span><br/>
-      <span class="text-accent" data-i18n="contact.h2b">people love.</span>
-    </h2>
-    <p class="text-stone-500 text-lg mb-10 max-w-md mx-auto" data-i18n="contact.p">
-      Have an app idea, a collaboration in mind, or just want to say hi?
-    </p>
-    <a href="mailto:hello@freitagskind.app" class="btn-primary" style="font-size:0.9rem;padding:14px 28px;">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-      </svg>
-      <span data-i18n="contact.btn">Contact freitagskind apps</span>
-    </a>
+<section id="contact" class="section-brand relative overflow-hidden"
+         style="padding:clamp(5rem,9vw,8.5rem) 0;"
+         aria-labelledby="contact-heading">
+
+  <!-- Decorative ghost rings -->
+  <div style="position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:min(46vw,500px);pointer-events:none;opacity:0.13;" aria-hidden="true">
+    <svg viewBox="0 0 500 500" fill="none">
+      <circle cx="250" cy="250" r="232" stroke="white" stroke-width="1"/>
+      <circle cx="250" cy="250" r="175" stroke="white" stroke-width="1" stroke-dasharray="8 16"/>
+      <circle cx="250" cy="250" r="108" stroke="white" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 relative" style="z-index:1;">
+    <div class="max-w-2xl reveal">
+      <h2 id="contact-heading" class="font-display"
+          style="font-size:clamp(2.6rem,6vw,5.2rem);font-weight:800;letter-spacing:-0.045em;line-height:1.02;margin-bottom:1.75rem;color:oklch(97% 0.003 175);">
+        <span data-i18n="contact.h2a">Let's build something</span><br/>
+        <span data-i18n="contact.h2b" style="color:oklch(74% 0.055 175);">people love.</span>
+      </h2>
+      <p style="font-size:1rem;color:oklch(78% 0.02 175);margin-bottom:2.5rem;max-width:42ch;line-height:1.78;"
+         data-i18n="contact.p">
+        Have an app idea, a collaboration in mind, or just want to say hi?
+      </p>
+      <a href="mailto:hello@freitagskind.app" class="contact-email" data-i18n="contact.btn">
+        hello@freitagskind.app
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor"
+             stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 14 14 3M8 3h6v6"/>
+        </svg>
+      </a>
+    </div>
   </div>
 </section>
 
+
 </main>
+
 
 <!-- ============================================================
      FOOTER
 ============================================================ -->
-<div class="section-divider"></div>
-<footer class="py-10" style="background:#fff;">
+<footer style="background:var(--bg);padding:2.5rem 0;border-top:1px solid var(--border);">
   <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5">
-    <div class="flex items-center gap-2.5">
-      <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="160" height="40" class="h-6 w-auto max-h-8 object-contain object-left opacity-90" />
-      <div>
-        <p class="text-stone-700 text-sm font-semibold">freitagskind apps</p>
-        <p class="text-stone-400 text-xs" data-i18n="footer.line">Thoughtful apps for everyday life.</p>
-      </div>
+    <div class="flex items-center gap-3">
+      <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps"
+           width="140" height="36" class="h-6 w-auto object-contain object-left"
+           style="opacity:0.65;" />
+      <span style="width:1px;height:11px;background:var(--border);flex-shrink:0;"></span>
+      <p style="font-size:0.8rem;color:var(--text-3);" data-i18n="footer.line">Thoughtful apps for everyday life.</p>
     </div>
-    <nav class="flex flex-wrap items-center justify-center gap-x-7 gap-y-2" aria-label="Footer navigation">
-      <a href="#apps"     class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer" data-i18n="nav.apps">Apps</a>
-      <a href="#approach" class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer" data-i18n="footer.approach">Approach</a>
-      <a href="#about"    class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer" data-i18n="nav.about">About</a>
-      <a href="#contact"  class="text-stone-400 text-sm hover:text-stone-700 transition-colors cursor-pointer" data-i18n="nav.contact">Contact</a>
-      <a href="imprint.html" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="footer.imprint">Imprint</a>
+    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer navigation">
+      <a href="#apps"      class="footer-link" data-i18n="nav.apps">Apps</a>
+      <a href="#approach"  class="footer-link" data-i18n="footer.approach">Approach</a>
+      <a href="#about"     class="footer-link" data-i18n="nav.about">About</a>
+      <a href="#contact"   class="footer-link" data-i18n="nav.contact">Contact</a>
+      <a href="imprint.html" class="footer-link" data-i18n="footer.imprint">Imprint</a>
     </nav>
-    <p class="text-stone-300 text-xs" data-i18n="footer.copy">&copy; 2026 freitagskind apps.</p>
+    <p style="font-size:0.75rem;color:var(--text-3);" data-i18n="footer.copy">© 2026 freitagskind apps.</p>
   </div>
 </footer>
 
 <script src="i18n.js"></script>
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        observer.unobserve(e.target);
+        revealObserver.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+  // Reduced motion: snap everything to final state
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
       el.style.transition = 'none';
     });
+    document.querySelectorAll('.reveal .feat-row, .reveal .feat-check').forEach(el => {
+      el.style.transform = 'none';
+    });
   }
+
+  // Active nav section tracking
+  (function () {
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        navLinks.forEach(link => {
+          link.classList.toggle('nav-link--active', link.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+    document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+  })();
 </script>
 
 </body>
