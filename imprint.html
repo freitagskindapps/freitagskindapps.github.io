@@ -7,112 +7,311 @@
   <meta name="description" content="Legal notice and imprint for freitagskind apps." />
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://freitagskindapps.github.io/imprint.html" />
-  <meta name="theme-color" content="#144543" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23144543'/%3E%3Crect x='8' y='10' width='16' height='2.5' rx='1.25' fill='%23fff'/%3E%3Crect x='8' y='15' width='12' height='2.5' rx='1.25' fill='%23fff' opacity='.7'/%3E%3Crect x='8' y='20' width='14' height='2.5' rx='1.25' fill='%23fff' opacity='.45'/%3E%3C/svg%3E" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="theme-color" content="#0c0c0b" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c0c0b'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='15' font-weight='600' fill='%23faf7f2'%3EFK%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..800,30;9..144,300..800,100&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #FAFAF9;
-      --border:    #E7E5E4;
-      --text:      #1C1917;
-      --text-2:    #57534E;
-      --brand:     #144543;
-      --brand-hover: #0F3634;
+      --ink:        #0c0c0b;
+      --paper:      #faf7f2;
+      --paper-2:    #f0ece4;
+      --rule:       rgba(12, 12, 11, 0.12);
+      --muted:      rgba(12, 12, 11, 0.55);
+      --ease:       cubic-bezier(0.22, 1, 0.36, 1);
     }
-    *, *::before, *::after { box-sizing: border-box; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      line-height: 1.6;
     }
-    .navbar {
-      background: rgba(250,250,249,0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(231,229,228,0.8);
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+      mix-blend-mode: overlay;
     }
-    .nav-link {
-      color: var(--text-2);
-      font-size: 0.875rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.15s ease;
-    }
-    .nav-link:hover { color: var(--text); }
-    .section-divider { height: 1px; background: var(--border); }
+
     .skip-link {
-      position: absolute;
-      left: -9999px;
-      z-index: 100;
-      padding: 12px 16px;
-      background: var(--brand);
-      color: #fff;
-      font-weight: 600;
-      border-radius: 0 0 8px 0;
-      text-decoration: none;
+      position: absolute; left: 1rem; top: -3rem;
+      background: var(--ink); color: var(--paper);
+      padding: 0.6rem 1rem; border-radius: 4px;
+      font-size: 0.85rem; z-index: 1000;
+      transition: top 0.18s var(--ease);
     }
-    .skip-link:focus {
-      left: 0;
-      top: 0;
-      outline: 2px solid #fff;
-      outline-offset: 2px;
+    .skip-link:focus { top: 1rem; }
+
+    .display {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 350;
+      font-variation-settings: "opsz" 144, "SOFT" 30;
+      letter-spacing: -0.025em;
+      line-height: 0.96;
     }
-    .lang-switch {
+
+    /* ------------ NAV ------------ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1.75rem clamp(1.5rem, 4vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), padding 0.4s var(--ease);
+    }
+    .nav--scrolled {
+      background: rgba(250, 247, 242, 0.78);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      padding-top: 1.1rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .monogram {
       display: inline-flex;
       align-items: center;
-      gap: 2px;
-      padding: 3px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.92);
+      text-decoration: none;
+      line-height: 1;
     }
-    .lang-switch__btn {
+    .monogram img {
+      height: 2.25rem;
+      width: auto;
+      display: block;
+    }
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.5rem, 4vw, 2.75rem);
+    }
+    .nav-link {
       font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding: 6px 10px;
-      border-radius: 8px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: opacity 0.2s var(--ease);
+      opacity: 0.78;
+      position: relative;
+    }
+    .nav-link:hover { opacity: 1; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -4px;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s var(--ease);
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .lang-switch {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      padding-left: clamp(1rem, 2vw, 1.5rem);
+      border-left: 1px solid var(--rule);
+    }
+    .lang-btn {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      opacity: 0.45;
+      background: none;
       border: none;
-      background: transparent;
-      color: var(--text-2);
       cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
+      padding: 0;
+      transition: opacity 0.2s var(--ease);
+      font-family: inherit;
     }
-    .lang-switch__btn:hover { color: var(--text); }
-    .lang-switch__btn--active,
-    .lang-switch__btn[aria-pressed="true"] {
-      background: #E8F4F3;
-      color: var(--brand);
+    .lang-btn:hover { opacity: 0.85; }
+    .lang-btn--active { opacity: 1; }
+
+    @media (max-width: 540px) {
+      .nav-list { gap: 1.1rem; }
+      .nav-link { font-size: 0.65rem; letter-spacing: 0.18em; }
+      .lang-switch { padding-left: 0.85rem; }
     }
-    .imprint-heading {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--text);
-      margin-bottom: 0.65rem;
+
+    /* ------------ ARTICLE ------------ */
+    .article {
+      padding: clamp(8rem, 18vh, 12rem) clamp(1.5rem, 4vw, 3rem) clamp(5rem, 10vw, 9rem);
     }
-    .imprint-block p,
-    .imprint-address {
-      font-size: 0.9375rem;
-      color: var(--text-2);
-      line-height: 1.75;
+    .article__inner {
+      max-width: 44rem;
+      margin: 0 auto;
+    }
+    .article__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .article__title {
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      margin-bottom: clamp(3rem, 6vw, 4.5rem);
+    }
+    .article__rule {
+      width: 3.5rem;
+      height: 1px;
+      background: var(--ink);
+      opacity: 0.85;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .imp-section {
+      padding: clamp(2rem, 4vw, 2.75rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .imp-section:last-of-type { border-bottom: none; }
+    .imp-section__head {
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 1.1rem;
+    }
+    .imp-section__body {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 350;
+      font-variation-settings: "opsz" 24, "SOFT" 30;
+      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+      line-height: 1.55;
+      letter-spacing: -0.005em;
+      color: var(--ink);
       font-style: normal;
+    }
+    .imp-section__body--small {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.78;
+      color: rgba(12, 12, 11, 0.72);
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    /* ------------ FOOTER ------------ */
+    .foot {
+      background: var(--ink);
+      color: var(--paper);
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+    }
+    .foot__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+    .foot__brand {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .foot__monogram {
+      width: 3rem; height: 3rem;
+      border: 1px solid rgba(250, 247, 242, 0.4);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 400;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      flex-shrink: 0;
+    }
+    .foot__copy {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      line-height: 1.85;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, 0.6);
+      max-width: 38ch;
+      font-weight: 500;
+    }
+    .foot__cta {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+    .foot__cta-line {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 350;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--paper);
+      max-width: 22ch;
+    }
+    .foot__contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--paper);
+      text-decoration: none;
+      padding-bottom: 0.55rem;
+      border-bottom: 1px solid rgba(250, 247, 242, 0.45);
+      transition: gap 0.3s var(--ease), border-color 0.2s var(--ease);
+    }
+    .foot__contact:hover {
+      gap: 1.1rem;
+      border-bottom-color: var(--paper);
+    }
+    .foot__bottom {
+      max-width: 1400px;
+      margin: clamp(3rem, 5vw, 4rem) auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(250, 247, 242, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, 0.45);
+      font-weight: 500;
+    }
+    .foot__bottom a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s var(--ease);
+    }
+    .foot__bottom a:hover { color: var(--paper); }
+    .foot__nav { display: flex; gap: clamp(1.25rem, 3vw, 2rem); flex-wrap: wrap; }
+
+    @media (max-width: 720px) {
+      .foot__inner { grid-template-columns: 1fr; }
+      .foot__cta { text-align: left; align-items: flex-start; }
     }
   </style>
 </head>
@@ -120,86 +319,95 @@
 
 <a href="#main" class="skip-link" data-i18n="skip.main">Skip to main content</a>
 
-<header class="fixed top-0 left-0 right-0 z-50">
-  <nav class="navbar px-6 py-4 flex items-center justify-between mx-auto w-full" style="max-width:100%;" aria-label="Primary">
-    <div class="max-w-6xl w-full mx-auto flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5 cursor-pointer">
-        <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="180" height="48" class="h-8 sm:h-9 w-auto max-h-10 object-contain object-left" />
-        <span class="font-semibold text-sm text-stone-800">freitagskind apps</span>
-      </a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="index.html#apps" class="nav-link" data-i18n="nav.apps">Apps</a>
-        <a href="index.html#about" class="nav-link" data-i18n="nav.about">About</a>
-        <a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
-      </div>
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" class="lang-switch__btn" data-lang-set="de" aria-pressed="false">DE</button>
-          <button type="button" class="lang-switch__btn" data-lang-set="en" aria-pressed="false">EN</button>
-        </div>
-        <a href="index.html#apps" class="inline-flex items-center gap-2 rounded-xl px-[18px] py-[9px] text-[0.8rem] font-semibold text-white shadow-sm transition hover:opacity-95" style="background:var(--brand);box-shadow:0 1px 3px rgba(20,69,67,0.25);" data-i18n="nav.explore">
-        Explore Apps
-      </a>
-      </div>
-    </div>
-  </nav>
-  <div class="section-divider"></div>
+<header id="nav" class="nav" aria-label="Primary">
+  <a href="index.html" class="monogram" aria-label="freitagskind apps home">
+    <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="200" height="200" />
+  </a>
+  <div class="nav-list">
+    <a href="index.html#work" class="nav-link" data-i18n="nav.work">Work</a>
+    <a href="index.html#about" class="nav-link" data-i18n="nav.about">About</a>
+    <a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+    <span class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang-set="de" aria-pressed="false">DE</button>
+      <button type="button" class="lang-btn" data-lang-set="en" aria-pressed="false">EN</button>
+    </span>
+  </div>
 </header>
 
-<main id="main" class="pt-28 pb-16 md:pt-36">
-  <div class="max-w-2xl mx-auto px-6">
-    <p class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-3" data-i18n="imprint.kicker">Legal</p>
-    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-stone-900 mb-10" data-i18n="imprint.h1">Imprint</h1>
+<main id="main" class="article">
+  <div class="article__inner">
+    <p class="article__eyebrow" data-i18n="imprint.kicker">Legal</p>
+    <h1 class="article__title display" data-i18n="imprint.h1">Imprint</h1>
+    <div class="article__rule" aria-hidden="true"></div>
 
-    <div class="space-y-10">
-      <section aria-labelledby="imprint-tmg">
-        <h2 id="imprint-tmg" class="imprint-heading" data-i18n="imprint.tmg">Information according to § 5 TMG</h2>
-        <address class="imprint-address">
-          Maximilian Freitag<br />
-          Rudolf-Zenker-Str. 5<br />
-          81377 München<br />
-          Germany
-        </address>
-      </section>
+    <section class="imp-section" aria-labelledby="imprint-tmg">
+      <h2 id="imprint-tmg" class="imp-section__head" data-i18n="imprint.tmg">Information according to § 5 TMG</h2>
+      <address class="imp-section__body">
+        Maximilian Freitag<br />
+        Rudolf-Zenker-Str. 5<br />
+        81377 München<br />
+        Germany
+      </address>
+    </section>
 
-      <section aria-labelledby="imprint-rstv">
-        <h2 id="imprint-rstv" class="imprint-heading" data-i18n="imprint.rstv">Responsible for content (§ 55 Abs. 2 RStV)</h2>
-        <p data-i18n="imprint.rstv.p">Maximilian Freitag</p>
-      </section>
+    <section class="imp-section" aria-labelledby="imprint-rstv">
+      <h2 id="imprint-rstv" class="imp-section__head" data-i18n="imprint.rstv">Responsible for content (§ 55 Abs. 2 RStV)</h2>
+      <p class="imp-section__body" data-i18n="imprint.rstv.p">Maximilian Freitag</p>
+    </section>
 
-      <section class="pt-10 border-t border-stone-200" aria-labelledby="imprint-disclaimer">
-        <h2 id="imprint-disclaimer" class="imprint-heading" data-i18n="imprint.disclaimer.h">Disclaimer</h2>
-        <p data-i18n="imprint.disclaimer.p">
-          Despite careful content control, we assume no liability for the
-          content of external links. The operators of the linked pages are
-          solely responsible for their content.
-        </p>
-      </section>
-    </div>
+    <section class="imp-section" aria-labelledby="imprint-disclaimer">
+      <h2 id="imprint-disclaimer" class="imp-section__head" data-i18n="imprint.disclaimer.h">Disclaimer</h2>
+      <p class="imp-section__body imp-section__body--small" data-i18n="imprint.disclaimer.p">
+        Despite careful content control, we assume no liability for the
+        content of external links. The operators of the linked pages are
+        solely responsible for their content.
+      </p>
+    </section>
   </div>
 </main>
 
-<div class="section-divider"></div>
-<footer class="py-10" style="background:#fff;">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5">
-    <div class="flex items-center gap-2.5">
-      <img src="freitagskind-apps-rectangle.png" alt="freitagskind apps" width="160" height="40" class="h-6 w-auto max-h-8 object-contain object-left opacity-90" />
-      <div>
-        <p class="text-stone-700 text-sm font-semibold">freitagskind apps</p>
-        <p class="text-stone-400 text-xs" data-i18n="footer.line">Thoughtful apps for everyday life.</p>
-      </div>
+<footer class="foot" id="contact">
+  <div class="foot__inner">
+    <div class="foot__brand">
+      <span class="foot__monogram" aria-hidden="true">FK</span>
+      <p class="foot__copy" data-i18n="foot.copy">
+        freitagskind apps is an independent development studio crafting digital experiences that inspire and empower.
+      </p>
     </div>
-    <nav class="flex flex-wrap items-center justify-center gap-x-7 gap-y-2" aria-label="Footer navigation">
-      <a href="index.html#apps" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="nav.apps">Apps</a>
-      <a href="index.html#approach" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="footer.approach">Approach</a>
-      <a href="index.html#about" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="nav.about">About</a>
-      <a href="index.html#contact" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="nav.contact">Contact</a>
-      <a href="imprint.html" class="text-stone-400 text-sm hover:text-stone-700 transition-colors" data-i18n="footer.imprint">Imprint</a>
+    <div class="foot__cta">
+      <p class="foot__cta-line" data-i18n="foot.cta">
+        Let's build something extraordinary together.
+      </p>
+      <a class="foot__contact" href="mailto:freitagskindapps@gmail.com" data-i18n="foot.contact">
+        Contact
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 11 11 2M5 2h6v6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="foot__bottom">
+    <span data-i18n="foot.copyright">© 2026 freitagskind apps</span>
+    <nav class="foot__nav" aria-label="Footer">
+      <a href="index.html#work" data-i18n="nav.work">Work</a>
+      <a href="index.html#about" data-i18n="nav.about">About</a>
+      <a href="mailto:freitagskindapps@gmail.com">freitagskindapps@gmail.com</a>
+      <a href="imprint.html" data-i18n="footer.imprint">Imprint</a>
     </nav>
-    <p class="text-stone-300 text-xs" data-i18n="footer.copy">&copy; 2026 freitagskind apps.</p>
   </div>
 </footer>
 
 <script src="i18n.js"></script>
+<script>
+  (function () {
+    const nav = document.getElementById('nav');
+    function update() {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+</script>
+
 </body>
 </html>
