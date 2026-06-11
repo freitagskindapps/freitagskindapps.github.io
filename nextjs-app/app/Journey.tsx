@@ -547,7 +547,9 @@ export default function Journey() {
     );
     windowPane.position.set(0, 1, 0.76);
     house.add(windowPane);
-    house.position.set(-1.2, 0.25, -0.8);
+    /* hBody's bottom edge is at local y=0.25, so the group sits at y≈0;
+       slightly below so the bumpy grass never shows a gap under the walls */
+    house.position.set(-1.2, -0.08, -0.8);
     house.rotation.y = 0.5;
     islandC.add(house);
 
@@ -763,8 +765,11 @@ export default function Journey() {
       [
         new THREE.Vector3(0, 50, 26),
         new THREE.Vector3(6, 38, 11),
-        new THREE.Vector3(-2, 24, -10),
-        new THREE.Vector3(2, 11.5, -8),
+        /* stay on the front side of the scene through the middle of the
+           descent — crossing behind the islands while the look target
+           swaps sides made the camera yaw ~180° in one leg */
+        new THREE.Vector3(-4, 24, 10),
+        new THREE.Vector3(4, 12, 10),
         new THREE.Vector3(2, -2, 10),
         new THREE.Vector3(0, -5, 11),
       ],
@@ -853,7 +858,8 @@ export default function Journey() {
       frame++;
       const time = frame * 0.016;
 
-      progress += (readScroll() - progress) * 0.07;
+      /* 0.05 caps how fast the camera can turn on a hard scroll fling */
+      progress += (readScroll() - progress) * 0.05;
 
       camCurve.getPoint(progress, camPos);
       lookCurve.getPoint(progress, lookPos);
