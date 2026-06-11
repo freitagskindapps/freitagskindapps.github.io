@@ -1,58 +1,48 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* Custom rules live in layers so Tailwind utilities keep precedence.
+   Tailwind v4 preflight already provides the box-sizing/margin reset. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  body {
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #FAFAF8;
+    color: #18181B;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
+  }
 
-body {
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #FAFAF8;
-  color: #18181B;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100dvh;
-}
+  ::selection {
+    background: #FEF3C7;
+    color: #78350F;
+  }
 
-/* Selection */
-::selection {
-  background: #FEF3C7;
-  color: #78350F;
-}
-
-/* Container */
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding-left: 3rem;
-    padding-right: 3rem;
+  a {
+    text-decoration: none;
   }
 }
 
-/* Link styles */
-a {
-  text-decoration: none;
-}
+@layer components {
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 
-.no-underline {
-  text-decoration: none !important;
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
 }
 
 /* Prose for imprint page */
